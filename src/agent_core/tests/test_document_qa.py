@@ -37,17 +37,28 @@ def search(tmp_path):
 
 
 class QAProvider:
-    def __init__(self, *, quote=QUOTE, evidence_id=None, supported=True, status="ok"):
+    def __init__(
+        self,
+        *,
+        quote=QUOTE,
+        evidence_id=None,
+        supported=True,
+        status="ok",
+        missing=None,
+    ):
         self.requests = []
         self.quote = quote
         self.evidence_id = evidence_id
         self.supported = supported
         self.status = status
+        self.missing = missing
 
     async def generate(self, request):
         self.requests.append(request)
         context = json.loads(request.messages[-1].content)
-        if "evidence" in context:
+        if "evidence" in context and "missing" in context:
+            data = {"supported": self.supported}
+        elif "evidence" in context:
             evidence = next(x for x in context["evidence"] if QUOTE in x["text"])
             data = {
                 "status": self.status,
@@ -65,7 +76,9 @@ class QAProvider:
                         ],
                     }
                 ],
-                "missing": "没有证明冠军身份的资料。"
+                "missing": self.missing
+                if self.missing is not None
+                else "没有证明冠军身份的资料。"
                 if self.status == "partial"
                 else "",
             }
@@ -131,6 +144,103 @@ def test_no_relevant_evidence_never_calls_model(search):
     assert result["status"] == "insufficient_evidence"
     assert not provider.requests
     assert result["citations"] == []
+    assert "火星轨道半径" in result["message"]
+    assert result["issues"][0]["code"] == "NO_RELEVANT_EVIDENCE"
+
+
+def test_filtered_no_hit_explains_actual_scope_without_claiming_global_absence(search):
+    provider = QAProvider()
+    result = asyncio.run(
+        DocumentQAService(provider, search).answer(
+            "那他呢？",
+            query="张伟沟通偏差",
+            doc_ids=["DOC-E001"],
+            version="v2",
+            as_of=date(2024, 1, 1),
+            request_id="qa-scope",
+        )
+    )
+    assert result["status"] == "insufficient_evidence"
+    assert "待回答的问题：张伟沟通偏差" in result["message"]
+    assert "文档编号 DOC-E001" in result["message"]
+    assert "版本 v2" in result["message"]
+    assert "适用日期 2024-01-01" in result["message"]
+    assert "本次检索" in result["message"]
+    assert not provider.requests
+    # 同一知识库在匹配的版本下仍有证据，筛选无命中不代表全库不存在。
+    assert search.search("张伟沟通偏差", version="v1")[0]
+
+
+def test_specific_missing_evidence_is_checked_before_display(search):
+    provider = QAProvider(status="insufficient_evidence", missing="张伟的手机号码")
+    result = asyncio.run(
+        DocumentQAService(provider, search).answer(
+            "根据张伟的回访记录，他的手机号码是多少？", request_id="qa-missing"
+        )
+    )
+    assert result["status"] == "insufficient_evidence"
+    assert "尚缺依据的内容：张伟的手机号码" in result["message"]
+    assert "来源和版本" in result["message"]
+    assert result["issues"][0]["code"] == "MISSING_DOCUMENT_EVIDENCE"
+    assert result["citations"] == []
+    assert len(provider.requests) == 2
+    check = json.loads(provider.requests[1].messages[-1].content)
+    assert check["missing"] == "张伟的手机号码"
+    assert check["evidence"] == result["evidence"]
+    assert result["trace"][-1]["service"] == "missing_check"
+    assert result["trace"][-1]["status"] == "ok"
+
+
+@pytest.mark.parametrize(
+    "missing",
+    ["张伟的电话是 13800000000", "所有文档都没有联系方式", "张伟是销售冠军"],
+)
+def test_rejected_missing_explanation_is_not_displayed(search, missing):
+    provider = QAProvider(
+        status="insufficient_evidence", missing=missing, supported=False
+    )
+    result = asyncio.run(
+        DocumentQAService(provider, search).answer(
+            "根据张伟的回访记录，他的手机号码是多少？", request_id="qa-rejected-missing"
+        )
+    )
+    assert result["status"] == "insufficient_evidence"
+    assert missing not in result["message"]
+    assert missing not in json.dumps(result, ensure_ascii=False)
+    assert "待回答的问题：根据张伟的回访记录，他的手机号码是多少？" in result["message"]
+    assert "尚缺依据的内容" not in result["message"]
+    assert result["citations"] == []
+    assert result["trace"][-1]["status"] == "rejected"
+
+
+@pytest.mark.parametrize("failure", ["invalid_json", "provider", "timeout"])
+def test_failed_missing_check_falls_back_to_scoped_insufficiency(search, failure):
+    class MissingCheckFails(QAProvider):
+        async def generate(self, request):
+            context = json.loads(request.messages[-1].content)
+            if "evidence" in context and "missing" in context:
+                if failure == "provider":
+                    raise ProviderAuthenticationError("secret-check-failure")
+                if failure == "timeout":
+                    raise TimeoutError("secret-check-failure")
+                return LLMResponse("not-json-secret-check-failure")
+            return await super().generate(request)
+
+    provider = MissingCheckFails(
+        status="insufficient_evidence", missing="未核验的缺失说明"
+    )
+    result = asyncio.run(
+        DocumentQAService(provider, search).answer(
+            "根据张伟的回访记录，他的手机号码是多少？", request_id="qa-missing-failure"
+        )
+    )
+    assert result["status"] == "insufficient_evidence"
+    assert "secret-check-failure" not in json.dumps(result)
+    assert "未核验的缺失说明" not in json.dumps(result, ensure_ascii=False)
+    assert "待回答的问题：根据张伟的回访记录，他的手机号码是多少？" in result["message"]
+    assert result["citations"] == []
+    assert result["trace"][-1]["service"] == "missing_check"
+    assert result["trace"][-1]["status"] == "error"
 
 
 @pytest.mark.parametrize(
@@ -165,6 +275,7 @@ def test_rejected_grounding_does_not_show_claim_or_citations(search):
     assert result["status"] == "insufficient_evidence"
     assert result["citations"] == []
     assert QUOTE not in result["message"]
+    assert result["issues"][0]["code"] == "ANSWER_GROUNDING_REJECTED"
 
 
 @pytest.mark.parametrize("status", ["partial", "insufficient_evidence"])
