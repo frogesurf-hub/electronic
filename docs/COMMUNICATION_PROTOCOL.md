@@ -36,14 +36,23 @@
 筛选为账单国家、城市、客户；口径固定 chinook_sales_amount_v1，不假定币种或退款语义。
 所有条件仍交给 H 的 SQLGenerationService.query(query, context) 二次校验。
 本阶段不支持分组、排名、任意跨表、明细及自由 SQL。
-文档问答支线使用独立 legacy_sales_demo 集合，返回答案及 citations，引用包含
+文档问答支线使用本机选用的独立集合（未配置时为 legacy_sales_demo），返回答案及 citations，引用包含
 evidence_id、doc_id、title、version、section、line_start/line_end、quote 和原文摘要。
 Markdown 的 page 为 null，不伪造页码。结果标明模拟来源，不修改 Chinook SQL 口径。
-检索条件支持 doc_ids/doc_version/doc_as_of；缺少这些筛选时搜索全部已导入模拟文档。
+检索条件支持 doc_ids/doc_titles/doc_version/doc_as_of；缺少筛选时仅搜索当前选用集合中的可用文档。
 qa_query 为补全指代后的检索文字，回答同时接收原问题；公共理解保留问题歧义并走澄清。
 问答模型及核验模型的内部 question 统一使用 qa_query（缺省时使用本轮问题），
 original_message 保留本轮原始补充；不能把单独姓名误当成完整的新问题。
 答案生成、缺失说明核验和依据核验均收到实际 document_scope（doc_ids/version/as_of）。
+新集合另带 collection_id，指定标题时附 doc_titles；标题／编号／版本／适用日同时过滤。
+2026-10-06 新增 schema 2 准备集合的证据适配，引用还包含 page、bbox、bbox_units、
+block_id、char_start/char_end、original_path；表格有 table_id/row_number/header_bbox，
+OCR 有 review_status 和可选 correction_note。source_id 是实际读取的集合编号，
+校验失败未读到集合时为 null；不得用旧集合编号标记新来源。
+活动配置损坏或原件／快照校验失败时返回错误，不自动回退其他集合。
+待复核的 OCR 片段不进入检索，已复核 OCR 的引用显示复核标识；文件与片段仍须完整性校验。
+桌面区分 Markdown/TXT 行号与 PDF／图片页码，显示坐标、表格行、更正和原件路径，
+不会把 PDF 页码伪装成文本行号。完整导入与选用流程见 docs/文档导入与准备.md。
 标题／版本／适用时间由与原文核对的元数据支持，方法等内容仍须对应正文摘录。
 按某日适用的文档查询，不等于断言事件发生在该日；若问实际发生时间仍需正文证据。
 结论核验为每条结论附上实际引用的 citation_contexts（原片段、逐字摘录、文档／版本／位置），

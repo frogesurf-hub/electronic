@@ -11,6 +11,7 @@ from agent_core.characters import (
 from agent_core.config import Settings
 from agent_core.core.business_flow import BusinessFlow
 from agent_core.providers import ProviderConfigurationError
+from agent_core.retrieval.search import ActiveDocumentSearch
 from agent_core.temporal import (
     SystemClock,
 )
@@ -238,6 +239,9 @@ def test_query_runtime_uses_shared_provider_and_business_flow(
     assert agent_args["name"] == "Query Agent"
     assert isinstance(agent_args["clock"], SystemClock)
     assert isinstance(agent_args["business_flow"], BusinessFlow)
+    flow = agent_args["business_flow"]
+    assert isinstance(flow._qa._search, ActiveDocumentSearch)
+    assert flow._understanding._document_catalog.__self__ is flow._qa._search
     assert "character" not in agent_args and "composer" not in agent_args
     server_args = calls[2][1]
     assert isinstance(server_args, dict)

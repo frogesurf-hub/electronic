@@ -15,6 +15,7 @@ from agent_core.observability import setup_logging
 from agent_core.providers import ProviderConfigurationError
 from agent_core.providers.deepseek import DeepSeekProvider
 from agent_core.retrieval.qa_service import DocumentQAService
+from agent_core.retrieval.search import ActiveDocumentSearch
 from agent_core.sql.generation_service import SQLGenerationService
 from agent_core.temporal import SystemClock
 from agent_core.understanding.service import UnderstandingService
@@ -129,15 +130,18 @@ async def run() -> None:
     )
 
     try:
+        document_search = ActiveDocumentSearch()
         agent = Agent(
             provider=provider,
             name="Query Agent",
             clock=clock,
             business_flow=BusinessFlow(
-                UnderstandingService(provider),
+                UnderstandingService(
+                    provider, document_catalog=document_search.catalog
+                ),
                 SQLGenerationService(provider),
                 clock,
-                qa_service=DocumentQAService(provider),
+                qa_service=DocumentQAService(provider, document_search),
             ),
         )
 

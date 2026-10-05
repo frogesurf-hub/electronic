@@ -146,6 +146,7 @@ class BusinessFlow:
                         text.strip(),
                         query=interpretation.qa_query,
                         doc_ids=interpretation.doc_ids,
+                        doc_titles=interpretation.doc_titles,
                         version=interpretation.doc_version,
                         as_of=interpretation.doc_as_of,
                         request_id=message.id,
@@ -162,6 +163,11 @@ class BusinessFlow:
                             else None
                         ),
                     }
+                    if interpretation.doc_titles:
+                        payload["document_scope"]["doc_titles"] = (
+                            interpretation.doc_titles
+                        )
+                    payload["document_scope"]["collection_id"] = qa.get("source_id")
                     result = (
                         self._response(payload)
                         if payload["status"] != "error"
@@ -180,7 +186,7 @@ class BusinessFlow:
                 result = self._error(
                     payload,
                     "UNSUPPORTED_REQUEST",
-                    "当前支持发票销售额查询和根据演示文档回答问题。",
+                    "当前支持发票销售额查询和根据已导入文档回答问题。",
                 )
             elif (
                 interpretation.unsupported_conditions

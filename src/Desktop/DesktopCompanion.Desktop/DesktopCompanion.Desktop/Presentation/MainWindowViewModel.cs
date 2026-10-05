@@ -279,10 +279,35 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
                 number++;
                 citationText.AppendLine(
                     $"[{number}] {item["title"]} · {item["version"]}");
-                citationText.AppendLine(
-                    $"{item["section"]}，第 {item["line_start"]}–{item["line_end"]} 行");
-                citationText.AppendLine($"原文：{item["quote"]}");
+                string location = item["page"] is not null
+                    ? $"第 {item["page"]} 页"
+                    : $"第 {item["line_start"]}–{item["line_end"]} 行";
+                citationText.AppendLine($"{item["section"]}，{location}");
+                if (item["bbox"] is JsonArray bounds)
+                {
+                    string units = item["bbox_units"]?.ToString() switch
+                    {
+                        "pdf_points" => "PDF 页坐标",
+                        "oriented_image_pixels" => "图片像素",
+                        _ => "原件坐标",
+                    };
+                    citationText.AppendLine($"位置：{bounds.ToJsonString()}（{units}）");
+                }
+                if (item["table_id"] is not null)
+                {
+                    citationText.AppendLine($"表格：{item["table_id"]}，第 {item["row_number"]} 行");
+                }
+                bool isOcr = item["method"]?.ToString().StartsWith("windows_ocr") == true;
+                citationText.AppendLine($"{(isOcr ? "原文（OCR 已复核）" : "原文")}：{item["quote"]}");
+                if (item["correction_note"] is not null)
+                {
+                    citationText.AppendLine($"更正记录：{item["correction_note"]}");
+                }
                 citationText.AppendLine($"来源：{item["source"]} · {item["collection_id"]}");
+                if (item["original_path"] is not null)
+                {
+                    citationText.AppendLine($"原件：{item["original_path"]}");
+                }
                 citationText.AppendLine();
             }
         }

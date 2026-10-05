@@ -29,6 +29,22 @@ class DocumentSearch:
             else PROJECT_ROOT / ".local" / "knowledge" / COLLECTION_ID
         )
         self._cache: OrderedDict[tuple, list[dict]] = OrderedDict()
+        self.loaded_collection_id = COLLECTION_ID
+
+    @property
+    def collection_id(self) -> str:
+        return COLLECTION_ID
+
+    def catalog(self) -> list[dict]:
+        collection, _ = self._load()
+        return [
+            {
+                field: doc.get(field)
+                for field in ("doc_id", "title", "version", "source", "applicable_time")
+            }
+            for doc in collection["documents"]
+            if doc.get("ready_for_retrieval", True)
+        ]
 
     def _load(self) -> tuple[dict, str]:
         index = self.folder / "index.json"
@@ -120,37 +136,61 @@ class DocumentSearch:
         question: str,
         *,
         doc_ids: list[str] | None = None,
+        doc_titles: list[str] | None = None,
         version: str | None = None,
         as_of: date | None = None,
     ) -> tuple[list[dict], bool]:
         collection, fingerprint = self._load()
+        self.loaded_collection_id = collection["collection_id"]
         selected = tuple(sorted(doc_ids or []))
-        key = (fingerprint, question.strip().casefold(), selected, version, as_of)
+        titles = tuple(sorted(doc_titles or []))
+        key = (
+            fingerprint,
+            question.strip().casefold(),
+            selected,
+            version,
+            as_of,
+            titles,
+        )
         if key in self._cache:
             self._cache.move_to_end(key)
             return deepcopy(self._cache[key]), True
         query_terms = set(keywords(question))
-        terms = [set(keywords(row["text"])) for row in collection["chunks"]]
-        frequencies = {
-            term: sum(term in words for words in terms) for term in query_terms
-        }
-        scored = []
+        candidates = []
         for chunk in collection["chunks"]:
+            if not chunk.get("ready_for_retrieval", True):
+                continue
             if selected and chunk["doc_id"] not in selected:
+                continue
+            if titles and chunk["title"] not in titles:
                 continue
             if version is not None and chunk["version"] != version:
                 continue
             if as_of is not None:
-                match = re.fullmatch(
-                    r"(\d{4}-\d{2}-\d{2})\s*起", chunk["applicable_time"]
-                )
-                if match is None or as_of < date.fromisoformat(match.group(1)):
-                    continue
+                if "valid_from" in chunk:
+                    start, end = chunk["valid_from"], chunk["valid_until"]
+                    if start is None or as_of < date.fromisoformat(start):
+                        continue
+                    if end is not None and as_of >= date.fromisoformat(end):
+                        continue
+                else:
+                    match = re.fullmatch(
+                        r"(\d{4}-\d{2}-\d{2})\s*起", chunk["applicable_time"]
+                    )
+                    if match is None or as_of < date.fromisoformat(match.group(1)):
+                        continue
+            candidates.append(chunk)
+        terms = [set(keywords(row["text"])) for row in candidates]
+        frequencies = {
+            term: sum(term in words for words in terms) for term in query_terms
+        }
+        scored = []
+        for chunk in candidates:
             overlap = query_terms.intersection(keywords(chunk["text"]))
             # 使用实际文本计算匹配，不能让损坏的倒排索引伪造相关性。
-            if len(overlap) < 2:
+            if not overlap or len(overlap) < min(2, len(query_terms)):
                 continue
-            total = len(collection["chunks"])
+            total = len(candidates)
             score = sum(
                 math.log(1 + total / (1 + frequencies[term])) for term in overlap
             )
@@ -161,3 +201,76 @@ class DocumentSearch:
         if len(self._cache) > 32:
             self._cache.popitem(last=False)
         return deepcopy(evidence), False
+
+
+class PreparedDocumentSearch(DocumentSearch):
+    @property
+    def collection_id(self) -> str:
+        return self.folder.name
+
+    def _load(self) -> tuple[dict, str]:
+        from agent_core.retrieval.preparation import encoded, validate_collection
+
+        collection = validate_collection(self.folder)
+        if collection["collection_id"] != self.collection_id:
+            raise ValueError("准备集合与目录编号不一致。")
+        fingerprint = hashlib.sha256(encoded(collection)).hexdigest()
+        docs = {(d["doc_id"], d["parsed_sha256"]): d for d in collection["documents"]}
+        parsed_blocks = {}
+        for key, doc in docs.items():
+            parsed = json.loads((self.folder / doc["parsed_file"]).read_text("utf-8"))
+            parsed_blocks[key] = {
+                b["block_id"]: b for p in parsed["pages"] for b in p["blocks"]
+            }
+            doc["applicable_time"] = _applicable_time(doc)
+        for chunk in collection["chunks"]:
+            key = (chunk["doc_id"], chunk["parsed_sha256"])
+            doc = docs[key]
+            block = parsed_blocks[key][chunk["block_id"]]
+            for field in (
+                "valid_from",
+                "valid_until",
+                "review_status",
+                "applicable_time",
+            ):
+                chunk[field] = doc[field]
+            chunk["file_sha256"] = doc["source_sha256"]
+            chunk["original_path"] = str((self.folder / doc["original_file"]).resolve())
+            chunk["correction_note"] = block.get("correction_note")
+        return collection, fingerprint
+
+
+def _applicable_time(doc: dict) -> str:
+    start, end = doc.get("valid_from"), doc.get("valid_until")
+    if start is None:
+        return "适用起始日期未知" + (f"；{end} 前截止" if end else "")
+    return f"{start} 起" + (f"，{end} 前截止（不包含）" if end else "")
+
+
+class ActiveDocumentSearch(DocumentSearch):
+    """每次请求读取选择配置和快照；切换或重新导入不会复用旧证据。"""
+
+    def __init__(self, root: Path | None = None) -> None:
+        from agent_core.retrieval.selection import KNOWLEDGE_ROOT
+
+        self.root = root if root is not None else KNOWLEDGE_ROOT
+        super().__init__(self.root / COLLECTION_ID)
+
+    @property
+    def collection_id(self) -> str:
+        from agent_core.retrieval.selection import active_collection_id
+
+        return active_collection_id(self.root)
+
+    def _load(self) -> tuple[dict, str]:
+        from agent_core.retrieval.selection import collection_folder
+
+        collection_id = self.collection_id
+        folder = collection_folder(self.root, collection_id)
+        search = (
+            DocumentSearch(folder)
+            if collection_id == COLLECTION_ID
+            else PreparedDocumentSearch(folder)
+        )
+        collection, fingerprint = search._load()
+        return collection, collection_id + ":" + fingerprint
