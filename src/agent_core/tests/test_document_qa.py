@@ -425,6 +425,168 @@ def test_genuine_qa_requirement_ambiguity_still_clarifies_before_retrieval(searc
     assert not sql.calls
 
 
+def test_name_clarification_resumes_full_qa_with_original_citation_context(tmp_path):
+    root = Path(__file__).resolve().parents[3]
+    import_collection(root / "database" / "documents", tmp_path / "knowledge")
+    search = DocumentSearch(tmp_path / "knowledge")
+    first_question = "根据演示文档，他是怎么提升合作效率的？"
+    resolved_question = "根据演示文档，陈敏是怎么提升合作效率的？"
+    method = "陈敏通过渠道伙伴共同制定方案、明确交付责任和季度复盘提升合作效率。"
+    pronoun_quote = "她保留方案版本和客户反馈，使承诺与验收标准可以追溯。"
+    named_claim = "陈敏保留方案版本和客户反馈，使承诺与验收标准可以追溯。"
+
+    class ResumedQAProvider:
+        def __init__(self):
+            self.requests = []
+
+        async def generate(self, request):
+            self.requests.append(request)
+            context = json.loads(request.messages[-1].content)
+            if "current_datetime" in context:
+                if context["message"] == first_question:
+                    return LLMResponse(
+                        json.dumps(
+                            {
+                                "problem_type": "qa",
+                                "qa_query": first_question,
+                                "issues": ["请确认指哪位员工。"],
+                            },
+                            ensure_ascii=False,
+                        )
+                    )
+                assert context["message"] == "陈敏"
+                assert context["pending_clarification"] is True
+                assert context["previous"]["qa_query"] == first_question
+                assert context["history"][0]["content"] == first_question
+                return LLMResponse(
+                    json.dumps(
+                        {
+                            "problem_type": "qa",
+                            "continues_task": True,
+                            "qa_query": resolved_question,
+                            "issues": [],
+                        },
+                        ensure_ascii=False,
+                    )
+                )
+            assert context["question"] == resolved_question
+            assert context["original_message"] == "陈敏"
+            if "evidence" in context:
+                chunk = next(
+                    row for row in context["evidence"] if method in row["text"]
+                )
+                return LLMResponse(
+                    json.dumps(
+                        {
+                            "status": "ok",
+                            "claims": [
+                                {
+                                    "text": method,
+                                    "references": [
+                                        {
+                                            "evidence_id": chunk["evidence_id"],
+                                            "quote": method,
+                                        }
+                                    ],
+                                },
+                                {
+                                "text": named_claim,
+                                    "references": [
+                                        {
+                                            "evidence_id": chunk["evidence_id"],
+                                            "quote": pronoun_quote,
+                                        }
+                                    ],
+                                },
+                            ],
+                            "missing": "",
+                        },
+                        ensure_ascii=False,
+                    )
+                )
+            claim = context["claims"][1]
+            assert claim["quotes"] == [pronoun_quote]
+            source = claim["citation_contexts"][0]
+            assert source["doc_id"] == "DOC-E002"
+            assert source["title"] == "陈敏销售经验分享"
+            assert source["quote"] == pronoun_quote
+            assert method in source["text"] and pronoun_quote in source["text"]
+            return LLMResponse('{"supported":true}')
+
+    provider, sql = ResumedQAProvider(), FakeSQL()
+    flow = BusinessFlow(
+        UnderstandingService(provider),
+        sql,
+        FixedClock(NOW),
+        qa_service=DocumentQAService(provider, search),
+    )
+
+    async def scenario():
+        first = await flow.process_message(request(first_question))
+        assert first.payload["status"] == "needs_clarification"
+        assert len(provider.requests) == 1
+        second = await flow.process_message(
+            request("陈敏", task=first.payload["task_id"])
+        )
+        assert second.payload["status"] == "ok"
+        assert second.payload["task_id"] == first.payload["task_id"]
+        assert second.payload["document_scope"]["query"] == resolved_question
+        assert len(second.payload["citations"]) == 2
+        assert all(row["doc_id"] == "DOC-E002" for row in second.payload["citations"])
+        assert method in second.payload["message"]
+        assert not sql.calls
+
+    asyncio.run(scenario())
+
+
+def test_missing_check_uses_full_question_after_name_supplement(search):
+    provider = QAProvider(status="insufficient_evidence", missing="张伟的手机号码")
+    question = "根据张伟的回访记录，他的手机号码是多少？"
+    result = asyncio.run(
+        DocumentQAService(provider, search).answer(
+            "张伟",
+            query=question,
+            request_id="qa-supplement-missing",
+        )
+    )
+    assert result["status"] == "insufficient_evidence"
+    assert len(provider.requests) == 2
+    for call in provider.requests:
+        context = json.loads(call.messages[-1].content)
+        assert context["question"] == question
+        assert context["original_message"] == "张伟"
+    assert result["citations"] == []
+
+
+@pytest.mark.parametrize(
+    "reason", ["unsupported_claim", "unresolved_reference", "question_mismatch"]
+)
+def test_grounding_rejection_still_hides_answer_and_records_bounded_reason(
+    search, reason
+):
+    class RejectedProvider(QAProvider):
+        async def generate(self, request):
+            context = json.loads(request.messages[-1].content)
+            if "claims" in context:
+                assert context["claims"][0]["citation_contexts"][0]["quote"] == QUOTE
+                return LLMResponse(
+                    json.dumps({"supported": False, "reason_code": reason})
+                )
+            return await super().generate(request)
+
+    result = asyncio.run(
+        DocumentQAService(RejectedProvider(), search).answer(
+            "张伟",
+            query="张伟如何减少沟通偏差？",
+            request_id="qa-bounded-reason",
+        )
+    )
+    assert result["status"] == "insufficient_evidence"
+    assert result["citations"] == []
+    assert QUOTE not in result["message"]
+    assert result["trace"][-1]["reason_code"] == reason
+
+
 def test_partial_claims_and_missing_text_are_hidden_when_grounding_rejects(search):
     provider = QAProvider(
         status="partial", missing="编造的手机号码 13800000000", supported=False
