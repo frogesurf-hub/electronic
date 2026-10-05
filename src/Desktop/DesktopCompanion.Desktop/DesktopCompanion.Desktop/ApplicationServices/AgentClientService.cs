@@ -11,6 +11,8 @@ public sealed class AgentClientService : IAgentClientService
 
     private CancellationTokenSource? _receiveCancellation;
     private Task? _receiveTask;
+    private readonly string _sessionId = Guid.NewGuid().ToString();
+    private string? _pendingTaskId;
 
     public AgentClientService(
         IAgentConnection connection)
@@ -62,7 +64,13 @@ public sealed class AgentClientService : IAgentClientService
             payload: new JsonObject
             {
                 ["message"] = message,
+                ["session_id"] = _sessionId,
             });
+
+        if (_pendingTaskId is not null)
+        {
+            request.Payload["task_id"] = _pendingTaskId;
+        }
 
         return _connection.SendAsync(
             request,
@@ -116,6 +124,11 @@ public sealed class AgentClientService : IAgentClientService
                     await _connection.ReceiveAsync(
                         cancellationToken)
                     .ConfigureAwait(false);
+
+                _pendingTaskId =
+                    message.Payload["status"]?.ToString() == "needs_clarification"
+                        ? message.Payload["task_id"]?.ToString()
+                        : null;
 
                 MessageReceived?.Invoke(
                     message);

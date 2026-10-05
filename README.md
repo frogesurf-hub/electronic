@@ -2,7 +2,7 @@
 
 > 当前分支 `competition/topic8-demo` 用于赛题八的 WPF 问数/问答迁移，基于 Phase 3 提交 `30c6bbd`。环境准备与启动步骤见 [比赛迁移记录](docs/比赛迁移记录.md)。下文保留原助手的历史项目说明，比赛开发状态以迁移记录为准。
 
-比赛开发先看 [目录导航](docs/目录导航.md) 和 [SQL 接入方案](docs/SQL接入方案.md)。队员 SQL 模块复用现有 Provider 接口。用户已部署 PostgreSQL/Chinook 并验收真实 DeepSeek 生成 SQL、检验及只读查询（2024 年美国发票金额 127.98）。离线复查入口为 `scripts/check-sql.ps1`，模型联调入口为 `scripts/check-model-sql.ps1`。当前 WPF 仍是原助手对话界面，自然语言解析和前端问数接线待做。
+比赛开发先看 [目录导航](docs/目录导航.md) 和 [SQL 接入方案](docs/SQL接入方案.md)。队员 SQL 模块复用现有 Provider 接口。用户已部署 PostgreSQL/Chinook 并验收真实 DeepSeek 生成 SQL、检验及只读查询（2024 年美国发票金额 127.98）。离线复查入口为 `scripts/check-sql.ps1`，结构化模型联调入口为 `scripts/check-model-sql.ps1`。当前新增统一自然语言理解、条件校验、内存会话及澄清，再调用原 SQL 服务；WPF 增加结果表格、实际 SQL 和执行记录。57 项针对性测试与 WPF 编译通过，真实自然语言与桌面澄清交互已通过用户验收。当前开放发票销售额汇总，已验收完整问题和澄清补充后的 127.98。5 份旧模拟 Markdown 已导入独立集合；关键词检索、带原文引用的文档问答及依据核验已接线，用户已验收张伟经验问答与原文引用，资料不足案例也已通过用户验收。J 的跨源融合尚未接入。业务协议见 [通信协议](docs/COMMUNICATION_PROTOCOL.md)。
 
 Desktop Companion Agent 是一个长期 Windows 桌面 AI 伴侣项目。
 

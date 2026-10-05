@@ -11,6 +11,7 @@ from agent_core.characters import (
 )
 from agent_core.composition import PromptContextComposer
 from agent_core.config import Settings
+from agent_core.core.business_flow import BusinessFlow
 from agent_core.providers import ProviderConfigurationError
 from agent_core.temporal import (
     Clock,
@@ -40,10 +41,7 @@ def test_active_character_can_be_selected_from_configured_directory(
     验证外部 Character 目录和 active ID 可以由 Settings 指定。
     """
 
-    character_path = (
-        tmp_path
-        / "custom.toml"
-    )
+    character_path = tmp_path / "custom.toml"
 
     character_path.write_text(
         '''
@@ -88,10 +86,7 @@ def test_unknown_active_character_id_is_rejected(
     验证配置的 active Character 不存在时启动边界显式失败。
     """
 
-    character_path = (
-        tmp_path
-        / "available.toml"
-    )
+    character_path = tmp_path / "available.toml"
 
     character_path.write_text(
         '''
@@ -219,6 +214,9 @@ def _install_runtime_fakes(
                 )
             )
 
+        async def generate(self, request):
+            raise AssertionError("Composition tests must not call the model")
+
     class FakeEventBus:
         def __init__(
             self,
@@ -265,6 +263,7 @@ def _install_runtime_fakes(
             character: CharacterDefinition,
             composer: PromptContextComposer,
             clock: Clock,
+            business_flow: BusinessFlow,
         ) -> None:
             self.character = character
             self.composer = composer
@@ -277,6 +276,7 @@ def _install_runtime_fakes(
                         "character": character,
                         "composer": composer,
                         "clock": clock,
+                        "business_flow": business_flow,
                     },
                 )
             )
@@ -329,8 +329,6 @@ def _install_runtime_fakes(
                 log_level,
             )
         )
-
-
 
     monkeypatch.setattr(
         main_module,
@@ -387,9 +385,7 @@ def _install_runtime_fakes(
 def test_provider_is_not_created_when_character_loading_fails(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    calls: list[
-        tuple[str, object]
-    ] = []
+    calls: list[tuple[str, object]] = []
 
     settings = _make_settings()
 
@@ -410,15 +406,9 @@ def test_provider_is_not_created_when_character_loading_fails(
             main_module.run(),
         )
 
-    assert not any(
-        name == "provider_init"
-        for name, _ in calls
-    )
+    assert not any(name == "provider_init" for name, _ in calls)
 
-    assert not any(
-        name == "event_bus_init"
-        for name, _ in calls
-    )
+    assert not any(name == "event_bus_init" for name, _ in calls)
 
 
 def test_provider_is_closed_when_event_bus_construction_fails(
@@ -429,9 +419,7 @@ def test_provider_is_closed_when_event_bus_construction_fails(
     已创建的 Provider 仍然会被关闭。
     """
 
-    calls: list[
-        tuple[str, object]
-    ] = []
+    calls: list[tuple[str, object]] = []
 
     settings = _make_settings()
 
@@ -457,20 +445,11 @@ def test_provider_is_closed_when_event_bus_construction_fails(
         17,
     ) in calls
 
-    assert not any(
-        name == "agent_init"
-        for name, _ in calls
-    )
+    assert not any(name == "agent_init" for name, _ in calls)
 
-    assert not any(
-        name == "event_bus_start"
-        for name, _ in calls
-    )
+    assert not any(name == "event_bus_start" for name, _ in calls)
 
-    assert not any(
-        name == "event_bus_close"
-        for name, _ in calls
-    )
+    assert not any(name == "event_bus_close" for name, _ in calls)
 
     assert calls[-1] == (
         "provider_close",
@@ -496,9 +475,7 @@ def test_run_initializes_deepseek_and_event_runtime(
     10. 关闭 Provider
     """
 
-    calls: list[
-        tuple[str, object]
-    ] = []
+    calls: list[tuple[str, object]] = []
 
     settings = _make_settings()
 
@@ -556,6 +533,7 @@ def test_run_initializes_deepseek_and_event_runtime(
         agent_init["clock"],
         SystemClock,
     )
+    assert isinstance(agent_init["business_flow"], BusinessFlow)
 
     assert calls[5][0] == "server_init"
 
@@ -623,9 +601,7 @@ def test_runtime_resources_are_closed_when_server_fails(
     Event Bus 与 Provider 都会被关闭。
     """
 
-    calls: list[
-        tuple[str, object]
-    ] = []
+    calls: list[tuple[str, object]] = []
 
     settings = _make_settings()
 
@@ -671,9 +647,7 @@ def test_provider_is_closed_when_event_bus_start_fails(
     runtime cleanup 仍会关闭 Event Bus 和 Provider。
     """
 
-    calls: list[
-        tuple[str, object]
-    ] = []
+    calls: list[tuple[str, object]] = []
 
     settings = _make_settings()
 
@@ -719,9 +693,7 @@ def test_provider_is_closed_when_event_bus_close_fails(
     Provider cleanup 仍然执行。
     """
 
-    calls: list[
-        tuple[str, object]
-    ] = []
+    calls: list[tuple[str, object]] = []
 
     settings = _make_settings()
 

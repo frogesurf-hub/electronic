@@ -1,4 +1,5 @@
 import logging
+from typing import TYPE_CHECKING
 
 from agent_core.characters import CharacterDefinition
 from agent_core.composition import PromptContextComposer
@@ -22,6 +23,9 @@ from agent_core.temporal import (
 )
 
 logger = logging.getLogger(__name__)
+
+if TYPE_CHECKING:
+    from agent_core.core.business_flow import BusinessFlow
 
 _PROVIDER_ERROR_PROTOCOL_MAP: tuple[
     tuple[
@@ -104,12 +108,14 @@ class Agent:
         character: CharacterDefinition,
         composer: PromptContextComposer,
         clock: Clock,
+        business_flow: "BusinessFlow | None" = None,
     ) -> None:
         self.name = name
         self._provider = provider
         self._character = character
         self._composer = composer
         self._clock = clock
+        self._business_flow = business_flow
 
     async def process_message(
         self,
@@ -120,6 +126,8 @@ class Agent:
         """
 
         if message.type == "chat":
+            if self._business_flow is not None:
+                return await self._business_flow.process_message(message)
             user_text = message.payload.get(
                 "message",
                 "",

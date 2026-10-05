@@ -11,19 +11,21 @@ from agent_core.communication import WebSocketServer
 from agent_core.composition import PromptContextComposer
 from agent_core.config import Settings, get_settings
 from agent_core.core.agent import Agent
+from agent_core.core.business_flow import BusinessFlow
 from agent_core.events import EventBus
 from agent_core.observability import setup_logging
 from agent_core.providers import ProviderConfigurationError
 from agent_core.providers.deepseek import DeepSeekProvider
+from agent_core.retrieval.qa_service import DocumentQAService
+from agent_core.sql.generation_service import SQLGenerationService
 from agent_core.temporal import SystemClock
+from agent_core.understanding.service import UnderstandingService
 
 logger = logging.getLogger(__name__)
 
 
 _BUILTIN_CHARACTER_DEFINITIONS_DIR = (
-    Path(__file__).resolve().parent
-    / "characters"
-    / "definitions"
+    Path(__file__).resolve().parent / "characters" / "definitions"
 )
 
 
@@ -102,7 +104,6 @@ async def run() -> None:
         settings,
     )
 
-
     logger.info(
         "Starting %s",
         settings.app_name,
@@ -145,6 +146,12 @@ async def run() -> None:
                 character=active_character,
                 composer=composer,
                 clock=clock,
+                business_flow=BusinessFlow(
+                    UnderstandingService(provider),
+                    SQLGenerationService(provider),
+                    clock,
+                    qa_service=DocumentQAService(provider),
+                ),
             )
 
             server = WebSocketServer(

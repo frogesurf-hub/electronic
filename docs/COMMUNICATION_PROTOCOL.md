@@ -1,5 +1,45 @@
 # Desktop Companion Agent Communication Protocol
 
+## 比赛分支：统一业务入口（2026-10-05）
+
+外层仍为 `id/type/timestamp/source/payload`，用户消息继续使用 `type=chat`。
+正常请求先经公共理解、校验和澄清，再进入支线，桌面不直接发送 SQL。
+
+请求 payload 保留 `message`，增加桌面为本次会话创建的 UUID `session_id`。
+澄清回答可附带上次响应的 `task_id`。`request_id` 取输入消息的 `id`；
+`task_id` 在同一澄清任务中保持不变，补充请求仍有新的 `request_id`。
+省略 session_id 时后端创建会话，客户端继续对话必须使用响应中的 session_id。
+会话暂存内存，重启或容量淘汰后清空；过期任务需重新提问。
+
+响应 payload 的共同字段：`message`（兼容原文字界面）、`status`、
+`problem_type`、`session_id`、`task_id`、`request_id`、`issues`、`citations`、`trace`。
+成功问数另有 `confirmed_query/source_id/metric_definition_id/columns/rows/sql/parameters/tables/truncated`。
+
+| status | 含义 |
+|---|---|
+| ok | 成功，合法空结果仍为成功 |
+| needs_clarification | 保存未明确任务并追问，不先执行业务 SQL |
+| insufficient_evidence | 文档证据不足 |
+| partial | 部分完成，有明确缺失 |
+| error | 服务失败或不支持该查询 |
+
+正常业务状态使用 `type=response`；error 使用 `type=error`，保留安全错误码 `code`。
+不返回凭据或原始底层异常。trace 只记录实际调用，SQL 的 execution_attempted 单独保留。
+当前可运行支线是 Chinook 发票销售额汇总，时间开始包含、结束不包含，
+筛选为账单国家、城市、客户；口径固定 chinook_sales_amount_v1，不假定币种或退款语义。
+所有条件仍交给 H 的 SQLGenerationService.query(query, context) 二次校验。
+本阶段不支持分组、排名、任意跨表、明细及自由 SQL。
+文档问答支线使用独立 legacy_sales_demo 集合，返回答案及 citations，引用包含
+evidence_id、doc_id、title、version、section、line_start/line_end、quote 和原文摘要。
+Markdown 的 page 为 null，不伪造页码。结果标明模拟来源，不修改 Chinook SQL 口径。
+检索条件支持 doc_ids/doc_version/doc_as_of；缺少这些筛选时搜索全部已导入模拟文档。
+qa_query 为补全指代后的检索文字，回答同时接收原问题；公共理解保留问题歧义并走澄清。
+没有相关原文时不调用模型，返回 insufficient_evidence。模型结论先检查引用标识和
+原文摘录，再通过共享 Provider 独立核对结论是否被所引用摘录支持。
+此检查有模型判断局限，不代表已经完成忠实度效果评估；支持不足时不展示该结论。
+trace 分别记录实际的检索／缓存复用、答案生成、引用核验及依据核验；融合仍未接入。
+共享 LLM Provider 由入口管理，模型不能覆盖可信字段、口径或权限边界。
+
 ## 1. Overview
 
 本文档定义 Desktop Companion Agent 内部模块之间的通信协议。
