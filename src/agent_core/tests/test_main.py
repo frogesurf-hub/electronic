@@ -6,22 +6,19 @@ from pydantic import SecretStr
 
 from agent_core import main as main_module
 from agent_core.characters import (
-    CharacterDefinition,
     CharacterNotFoundError,
 )
-from agent_core.composition import PromptContextComposer
 from agent_core.config import Settings
 from agent_core.core.business_flow import BusinessFlow
 from agent_core.providers import ProviderConfigurationError
 from agent_core.temporal import (
-    Clock,
     SystemClock,
 )
 
 
 def test_default_active_character_is_builtin_aria() -> None:
     """
-    验证默认 Runtime Character 是随包分发的 Aria。
+    验证历史角色加载助手仍可读取内置 Aria。
     """
 
     settings = _make_settings()
@@ -83,7 +80,7 @@ def test_unknown_active_character_id_is_rejected(
     tmp_path: Path,
 ) -> None:
     """
-    验证配置的 active Character 不存在时启动边界显式失败。
+    验证历史角色加载助手拒绝不存在的 active Character。
     """
 
     character_path = tmp_path / "available.toml"
@@ -167,559 +164,136 @@ def _install_runtime_fakes(
     calls: list[tuple[str, object]],
     settings: Settings,
     *,
-    server_error: Exception | None = None,
-    event_bus_init_error: Exception | None = None,
-    event_bus_start_error: Exception | None = None,
-    event_bus_close_error: Exception | None = None,
-    character_load_error: Exception | None = None,
-) -> CharacterDefinition:
-    """
-    替换 Composition Root 外部组件，
-    避免真实网络、SDK client 和后台 Event Bus task。
-    """
+    failure_at: str | None = None,
+    failure: BaseException | None = None,
+) -> None:
+    # Real BusinessFlow wiring is exercised without network or database access.
+    def record(name: str, value: object = None) -> None:
+        calls.append((name, value))
+        if name == failure_at:
+            assert failure is not None
+            raise failure
 
-    test_character = CharacterDefinition(
-        character_id="test",
-        display_name="Test",
-        identity="A test companion.",
-        persona="Calm.",
-        speech_style="Concise.",
-    )
-
-    class FakeDeepSeekProvider:
-        def __init__(
-            self,
-            api_key: str,
-            model: str,
-            timeout_seconds: float,
-            thinking_enabled: bool,
-        ) -> None:
-            calls.append(
-                (
-                    "provider_init",
-                    {
-                        "api_key": api_key,
-                        "model": model,
-                        "timeout_seconds": timeout_seconds,
-                        "thinking_enabled": thinking_enabled,
-                    },
-                )
-            )
-
-        async def aclose(self) -> None:
-            calls.append(
-                (
-                    "provider_close",
-                    None,
-                )
-            )
+    class FakeProvider:
+        def __init__(self, **kwargs):
+            record("provider_init", kwargs)
 
         async def generate(self, request):
             raise AssertionError("Composition tests must not call the model")
 
-    class FakeEventBus:
-        def __init__(
-            self,
-            *,
-            queue_capacity: int,
-        ) -> None:
-            calls.append(
-                (
-                    "event_bus_init",
-                    queue_capacity,
-                )
-            )
-
-            if event_bus_init_error is not None:
-                raise event_bus_init_error
-
-        async def start(self) -> None:
-            calls.append(
-                (
-                    "event_bus_start",
-                    None,
-                )
-            )
-
-            if event_bus_start_error is not None:
-                raise event_bus_start_error
-
-        async def close(self) -> None:
-            calls.append(
-                (
-                    "event_bus_close",
-                    None,
-                )
-            )
-
-            if event_bus_close_error is not None:
-                raise event_bus_close_error
+        async def aclose(self):
+            record("provider_close")
 
     class FakeAgent:
-        def __init__(
-            self,
-            provider: object,
-            *,
-            character: CharacterDefinition,
-            composer: PromptContextComposer,
-            clock: Clock,
-            business_flow: BusinessFlow,
-        ) -> None:
-            self.character = character
-            self.composer = composer
-            self.clock = clock
-            calls.append(
-                (
-                    "agent_init",
-                    {
-                        "provider": provider,
-                        "character": character,
-                        "composer": composer,
-                        "clock": clock,
-                        "business_flow": business_flow,
-                    },
-                )
-            )
+        def __init__(self, **kwargs):
+            record("agent_init", kwargs)
 
-    class FakeWebSocketServer:
-        def __init__(
-            self,
-            host: str,
-            port: int,
-            agent: object,
-        ) -> None:
-            calls.append(
-                (
-                    "server_init",
-                    (
-                        host,
-                        port,
-                        agent,
-                    ),
-                )
-            )
+    class FakeServer:
+        def __init__(self, **kwargs):
+            record("server_init", kwargs)
 
-        async def run(self) -> None:
-            calls.append(
-                (
-                    "server_run",
-                    None,
-                )
-            )
+        async def run(self):
+            record("server_run")
 
-            if server_error is not None:
-                raise server_error
+    def obsolete_character_loader(_settings):
+        raise AssertionError("Query startup must not load companion characters")
 
-    def fake_get_settings() -> Settings:
-        calls.append(
-            (
-                "get_settings",
-                None,
-            )
-        )
-
-        return settings
-
-    def fake_setup_logging(
-        log_level: str,
-    ) -> None:
-        calls.append(
-            (
-                "setup_logging",
-                log_level,
-            )
-        )
-
+    monkeypatch.setattr(main_module, "get_settings", lambda: settings)
+    monkeypatch.setattr(main_module, "setup_logging", lambda **kw: None)
     monkeypatch.setattr(
-        main_module,
-        "get_settings",
-        fake_get_settings,
+        main_module, "_load_active_character", obsolete_character_loader
     )
-
-    def fake_load_active_character(
-        _settings: Settings,
-    ) -> CharacterDefinition:
-        if character_load_error is not None:
-            raise character_load_error
-
-        return test_character
-
-    monkeypatch.setattr(
-        main_module,
-        "_load_active_character",
-        fake_load_active_character,
-    )
-
-    monkeypatch.setattr(
-        main_module,
-        "setup_logging",
-        fake_setup_logging,
-    )
-
-    monkeypatch.setattr(
-        main_module,
-        "DeepSeekProvider",
-        FakeDeepSeekProvider,
-    )
-
-    monkeypatch.setattr(
-        main_module,
-        "EventBus",
-        FakeEventBus,
-    )
-
-    monkeypatch.setattr(
-        main_module,
-        "Agent",
-        FakeAgent,
-    )
-
-    monkeypatch.setattr(
-        main_module,
-        "WebSocketServer",
-        FakeWebSocketServer,
-    )
-    return test_character
+    monkeypatch.setattr(main_module, "DeepSeekProvider", FakeProvider)
+    monkeypatch.setattr(main_module, "Agent", FakeAgent)
+    monkeypatch.setattr(main_module, "WebSocketServer", FakeServer)
 
 
-def test_provider_is_not_created_when_character_loading_fails(
+def test_query_runtime_uses_shared_provider_and_business_flow(
     monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
 ) -> None:
     calls: list[tuple[str, object]] = []
-
-    settings = _make_settings()
-
-    _install_runtime_fakes(
-        monkeypatch,
-        calls,
-        settings,
-        character_load_error=RuntimeError(
-            "character load failed",
-        ),
+    # Even missing obsolete role files do not stop the query runtime.
+    settings = _make_settings(
+        character_definitions_dir=tmp_path / "missing",
+        active_character_id="missing",
     )
-
-    with pytest.raises(
-        RuntimeError,
-        match="character load failed",
-    ):
-        asyncio.run(
-            main_module.run(),
-        )
-
-    assert not any(name == "provider_init" for name, _ in calls)
-
-    assert not any(name == "event_bus_init" for name, _ in calls)
-
-
-def test_provider_is_closed_when_event_bus_construction_fails(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    """
-    验证 Event Bus 构造失败时，
-    已创建的 Provider 仍然会被关闭。
-    """
-
-    calls: list[tuple[str, object]] = []
-
-    settings = _make_settings()
-
-    _install_runtime_fakes(
-        monkeypatch,
-        calls,
-        settings,
-        event_bus_init_error=RuntimeError(
-            "event bus init failed",
-        ),
-    )
-
-    with pytest.raises(
-        RuntimeError,
-        match="event bus init failed",
-    ):
-        asyncio.run(
-            main_module.run(),
-        )
-
-    assert (
-        "event_bus_init",
-        17,
-    ) in calls
-
-    assert not any(name == "agent_init" for name, _ in calls)
-
-    assert not any(name == "event_bus_start" for name, _ in calls)
-
-    assert not any(name == "event_bus_close" for name, _ in calls)
-
-    assert calls[-1] == (
-        "provider_close",
-        None,
-    )
-
-
-def test_run_initializes_deepseek_and_event_runtime(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    """
-    验证 Composition Root：
-
-    1. 读取 Settings
-    2. 初始化 Logging
-    3. 创建 DeepSeek Provider
-    4. 创建 Event Bus
-    5. 注入 Agent
-    6. 创建 WebSocketServer
-    7. 启动 Event Bus
-    8. 启动 Server
-    9. 关闭 Event Bus
-    10. 关闭 Provider
-    """
-
-    calls: list[tuple[str, object]] = []
-
-    settings = _make_settings()
-
-    test_character = _install_runtime_fakes(
-        monkeypatch,
-        calls,
-        settings,
-    )
-
-    asyncio.run(
-        main_module.run(),
-    )
-
-    assert calls[0] == (
-        "get_settings",
-        None,
-    )
-
-    assert calls[1] == (
-        "setup_logging",
-        "DEBUG",
-    )
-
-    assert calls[2] == (
+    _install_runtime_fakes(monkeypatch, calls, settings)
+    asyncio.run(main_module.run())
+    assert [name for name, _ in calls] == [
         "provider_init",
-        {
-            "api_key": "test-secret-key",
-            "model": "deepseek-flash",
-            "timeout_seconds": 45.0,
-            "thinking_enabled": False,
-        },
-    )
-
-    assert calls[3] == (
-        "event_bus_init",
-        17,
-    )
-
-    assert calls[4][0] == "agent_init"
-
-    agent_init = calls[4][1]
-
-    assert isinstance(
-        agent_init,
-        dict,
-    )
-
-    assert agent_init["character"] is test_character
-    assert isinstance(
-        agent_init["composer"],
-        PromptContextComposer,
-    )
-
-    assert isinstance(
-        agent_init["clock"],
-        SystemClock,
-    )
-    assert isinstance(agent_init["business_flow"], BusinessFlow)
-
-    assert calls[5][0] == "server_init"
-
-    assert calls[6] == (
-        "event_bus_start",
-        None,
-    )
-
-    assert calls[7] == (
+        "agent_init",
+        "server_init",
         "server_run",
-        None,
-    )
-
-    assert calls[8] == (
-        "event_bus_close",
-        None,
-    )
-
-    assert calls[9] == (
         "provider_close",
-        None,
-    )
-
-
-def test_missing_deepseek_api_key_is_rejected() -> None:
-    """
-    验证缺少 DeepSeek API Key 时启动立即失败。
-    """
-
-    settings = _make_settings(
-        api_key=None,
-    )
-
-    with pytest.raises(
-        ProviderConfigurationError,
-    ):
-        main_module._create_provider(
-            settings,
-        )
-
-
-def test_unsupported_model_provider_is_rejected() -> None:
-    """
-    验证 Phase 1 尚未支持的 Provider
-    不会被静默替换或忽略。
-    """
-
-    settings = _make_settings(
-        model_provider="unsupported",
-    )
-
-    with pytest.raises(
-        ProviderConfigurationError,
-    ):
-        main_module._create_provider(
-            settings,
-        )
-
-
-def test_runtime_resources_are_closed_when_server_fails(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    """
-    验证 WebSocketServer 异常退出时，
-    Event Bus 与 Provider 都会被关闭。
-    """
-
-    calls: list[tuple[str, object]] = []
-
-    settings = _make_settings()
-
-    _install_runtime_fakes(
-        monkeypatch,
-        calls,
-        settings,
-        server_error=RuntimeError(
-            "server failed",
-        ),
-    )
-
-    with pytest.raises(
-        RuntimeError,
-        match="server failed",
-    ):
-        asyncio.run(
-            main_module.run(),
-        )
-
-    assert (
-        "server_run",
-        None,
-    ) in calls
-
-    assert calls[-2:] == [
-        (
-            "event_bus_close",
-            None,
-        ),
-        (
-            "provider_close",
-            None,
-        ),
     ]
+    assert calls[0][1] == {
+        "api_key": "test-secret-key",
+        "model": "deepseek-flash",
+        "timeout_seconds": 45.0,
+        "thinking_enabled": False,
+    }
+    agent_args = calls[1][1]
+    assert isinstance(agent_args, dict)
+    assert agent_args["name"] == "Query Agent"
+    assert isinstance(agent_args["clock"], SystemClock)
+    assert isinstance(agent_args["business_flow"], BusinessFlow)
+    assert "character" not in agent_args and "composer" not in agent_args
+    server_args = calls[2][1]
+    assert isinstance(server_args, dict)
+    assert server_args["host"] == "127.0.0.1" and server_args["port"] == 9999
 
 
-def test_provider_is_closed_when_event_bus_start_fails(
+@pytest.mark.parametrize("failure_at", ["agent_init", "server_init", "server_run"])
+def test_provider_is_closed_when_query_runtime_fails(
     monkeypatch: pytest.MonkeyPatch,
+    failure_at: str,
 ) -> None:
-    """
-    验证 Event Bus 启动失败时，
-    runtime cleanup 仍会关闭 Event Bus 和 Provider。
-    """
-
     calls: list[tuple[str, object]] = []
-
-    settings = _make_settings()
-
     _install_runtime_fakes(
         monkeypatch,
         calls,
-        settings,
-        event_bus_start_error=RuntimeError(
-            "event bus start failed",
-        ),
+        _make_settings(),
+        failure_at=failure_at,
+        failure=RuntimeError("runtime failed"),
     )
-
-    with pytest.raises(
-        RuntimeError,
-        match="event bus start failed",
-    ):
-        asyncio.run(
-            main_module.run(),
-        )
-
-    assert (
-        "server_run",
-        None,
-    ) not in calls
-
-    assert calls[-2:] == [
-        (
-            "event_bus_close",
-            None,
-        ),
-        (
-            "provider_close",
-            None,
-        ),
-    ]
+    with pytest.raises(RuntimeError, match="runtime failed"):
+        asyncio.run(main_module.run())
+    assert calls[-1] == ("provider_close", None)
+    assert sum(name == "provider_close" for name, _ in calls) == 1
+    if failure_at != "server_run":
+        assert not any(name == "server_run" for name, _ in calls)
 
 
-def test_provider_is_closed_when_event_bus_close_fails(
+def test_provider_is_closed_on_runtime_cancellation(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """
-    验证 Event Bus cleanup 自身失败时，
-    Provider cleanup 仍然执行。
-    """
-
     calls: list[tuple[str, object]] = []
-
-    settings = _make_settings()
-
     _install_runtime_fakes(
         monkeypatch,
         calls,
-        settings,
-        event_bus_close_error=RuntimeError(
-            "event bus close failed",
-        ),
+        _make_settings(),
+        failure_at="server_run",
+        failure=asyncio.CancelledError(),
     )
+    with pytest.raises(asyncio.CancelledError):
+        asyncio.run(main_module.run())
+    assert calls[-1] == ("provider_close", None)
 
-    with pytest.raises(
-        RuntimeError,
-        match="event bus close failed",
-    ):
-        asyncio.run(
-            main_module.run(),
-        )
 
-    assert (
-        "event_bus_close",
-        None,
-    ) in calls
-
-    assert calls[-1] == (
-        "provider_close",
-        None,
-    )
+@pytest.mark.parametrize(
+    "settings",
+    [
+        _make_settings(api_key=None),
+        _make_settings(model_provider="unsupported"),
+    ],
+)
+def test_invalid_provider_configuration_fails_before_server_start(
+    monkeypatch: pytest.MonkeyPatch,
+    settings: Settings,
+) -> None:
+    calls: list[tuple[str, object]] = []
+    _install_runtime_fakes(monkeypatch, calls, settings)
+    with pytest.raises(ProviderConfigurationError):
+        asyncio.run(main_module.run())
+    assert calls == []

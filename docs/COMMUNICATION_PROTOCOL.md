@@ -43,10 +43,14 @@ Markdown 的 page 为 null，不伪造页码。结果标明模拟来源，不修
 qa_query 为补全指代后的检索文字，回答同时接收原问题；公共理解保留问题歧义并走澄清。
 问答模型及核验模型的内部 question 统一使用 qa_query（缺省时使用本轮问题），
 original_message 保留本轮原始补充；不能把单独姓名误当成完整的新问题。
+答案生成、缺失说明核验和依据核验均收到实际 document_scope（doc_ids/version/as_of）。
+标题／版本／适用时间由与原文核对的元数据支持，方法等内容仍须对应正文摘录。
+按某日适用的文档查询，不等于断言事件发生在该日；若问实际发生时间仍需正文证据。
 结论核验为每条结论附上实际引用的 citation_contexts（原片段、逐字摘录、文档／版本／位置），
 用于解释原文指代及限定条件；引用仍须先通过原文和标识校验，不借用其他片段补足结论。
 核验拒绝时 trace.grounding_check.reason_code 仅为受限分类：unsupported_claim、
 unresolved_reference、question_mismatch、invalid_missing 或 unspecified，不显示原始模型解释。
+核验拒绝日志仅记录 request_id 与上述受限 reason_code，不记录原始问题、结论草稿或摘录。
 qa 的理解 issues 只用于需要用户确认的需求歧义或矛盾，不用于尚未检索的资料覆盖判断。
 问题明确但可能缺少部分答案时，保留全部子问题交给问答支线；不能先以资料不足提示阻断。
 问答逐项检查证据，至少一项可回答而其余项不足时返回 partial，保留可核验结论和引用，
@@ -63,6 +67,12 @@ issues 使用 NO_RELEVANT_EVIDENCE（检索未命中）、MISSING_DOCUMENT_EVIDE
 资料不足结果的 citations 仍为空；issues 沿用桌面的条件与执行记录展示。
 trace 分别记录实际的检索／缓存复用、答案生成、引用核验及依据核验；融合仍未接入。
 共享 LLM Provider 由入口管理，模型不能覆盖可信字段、口径或权限边界。
+
+比赛运行入口直接注入 BusinessFlow、共享 Provider 与 Clock，不加载旧陪伴角色配置，
+不启动 EventBus；原 Agent 陪伴路径仅在显式注入 Character／Composer 时可用。
+服务器构造失败、运行失败、取消或正常返回时，入口关闭共享 Provider。
+同一会话发生理解／SQL 服务错误后仍可发送完整问题重试；历史最多保留 6 轮，
+新建会话使用新的 session_id。错误、资料不足等状态仍沿用上述响应契约。
 
 ## 1. Overview
 

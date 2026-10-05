@@ -171,6 +171,131 @@ def test_filtered_no_hit_explains_actual_scope_without_claiming_global_absence(s
     assert search.search("张伟沟通偏差", version="v1")[0]
 
 
+def test_applicability_scope_and_original_metadata_reach_answer_and_grounding(tmp_path):
+    root = Path(__file__).resolve().parents[3]
+    import_collection(root / "database" / "documents", tmp_path / "knowledge")
+    search = DocumentSearch(tmp_path / "knowledge")
+    quote = "他通过持续记录需求变更、每周回访和售后问题复盘，减少沟通偏差。"
+    claim = "张伟通过持续记录需求变更、每周回访和售后问题复盘，减少沟通偏差。"
+    scope = {"doc_ids": ["DOC-E001"], "version": "v1", "as_of": "2024-01-01"}
+
+    class ScopedProvider:
+        def __init__(self):
+            self.requests = []
+
+        async def generate(self, request):
+            self.requests.append(request)
+            context = json.loads(request.messages[-1].content)
+            assert context["document_scope"] == scope
+            if "evidence" in context:
+                chunk = next(row for row in context["evidence"] if quote in row["text"])
+                assert chunk["applicable_time"] == "2023-01-01 起"
+                assert chunk["title"] == "张伟销售经验分享"
+                data = {
+                    "status": "ok",
+                    "missing": "",
+                    "claims": [
+                        {
+                            "text": claim,
+                            "references": [
+                                {
+                                    "evidence_id": chunk["evidence_id"],
+                                    "quote": quote,
+                                }
+                            ],
+                        }
+                    ],
+                }
+            else:
+                citation = context["claims"][0]["citation_contexts"][0]
+                assert citation["doc_id"] == "DOC-E001"
+                assert citation["version"] == "v1"
+                assert citation["applicable_time"] == "2023-01-01 起"
+                assert citation["quote"] == quote
+                assert "2024-01-01" not in quote
+                data = {"supported": True}
+            return LLMResponse(json.dumps(data, ensure_ascii=False))
+
+    provider = ScopedProvider()
+    service = DocumentQAService(provider, search)
+
+    async def scenario():
+        excluded = await service.answer(
+            "依据在 2022-01-01 适用的张伟文档介绍沟通偏差方法。",
+            doc_ids=["DOC-E001"],
+            version="v1",
+            as_of=date(2022, 1, 1),
+            request_id="qa-before-applicability",
+        )
+        assert excluded["status"] == "insufficient_evidence"
+        assert provider.requests == []
+        included = await service.answer(
+            "依据在 2024-01-01 适用的张伟文档介绍沟通偏差方法。",
+            doc_ids=["DOC-E001"],
+            version="v1",
+            as_of=date(2024, 1, 1),
+            request_id="qa-within-applicability",
+        )
+        assert included["status"] == "ok"
+        assert included["citations"][0]["quote"] == quote
+        assert len(provider.requests) == 2
+
+    asyncio.run(scenario())
+
+
+def test_missing_check_receives_same_actual_document_scope(search):
+    provider = QAProvider(status="insufficient_evidence", missing="张伟的手机号码")
+    result = asyncio.run(
+        DocumentQAService(provider, search).answer(
+            "依据在 2024-01-01 适用的张伟回访记录查询手机号码。",
+            doc_ids=["DOC-E001"],
+            version="v1",
+            as_of=date(2024, 1, 1),
+            request_id="qa-scoped-missing",
+        )
+    )
+    assert result["status"] == "insufficient_evidence"
+    assert len(provider.requests) == 2
+    for call in provider.requests:
+        context = json.loads(call.messages[-1].content)
+        assert context["document_scope"] == {
+            "doc_ids": ["DOC-E001"],
+            "version": "v1",
+            "as_of": "2024-01-01",
+        }
+
+
+def test_applicability_does_not_bypass_rejection_of_an_event_date(search, caplog):
+    dated_claim = "张伟在 2024-01-01 实施了每周回访。"
+
+    class EventDateProvider(QAProvider):
+        async def generate(self, request):
+            context = json.loads(request.messages[-1].content)
+            if "claims" in context:
+                assert context["document_scope"]["as_of"] == "2024-01-01"
+                assert context["claims"][0]["text"] == dated_claim
+                return LLMResponse(
+                    '{"supported":false,"reason_code":"unsupported_claim"}'
+                )
+            response = await super().generate(request)
+            draft = json.loads(response.content)
+            draft["claims"][0]["text"] = dated_claim
+            return LLMResponse(json.dumps(draft, ensure_ascii=False))
+
+    result = asyncio.run(
+        DocumentQAService(EventDateProvider(), search).answer(
+            "张伟在 2024-01-01 实施了哪些回访来减少沟通偏差？",
+            as_of=date(2024, 1, 1),
+            request_id="qa-event-date-rejected",
+        )
+    )
+    assert result["status"] == "insufficient_evidence"
+    assert result["citations"] == [] and dated_claim not in result["message"]
+    assert result["trace"][-1]["reason_code"] == "unsupported_claim"
+    assert "qa-event-date-rejected reason_code=unsupported_claim" in caplog.text
+    assert dated_claim not in caplog.text and QUOTE not in caplog.text
+
+
 def test_specific_missing_evidence_is_checked_before_display(search):
     provider = QAProvider(status="insufficient_evidence", missing="张伟的手机号码")
     result = asyncio.run(
@@ -490,7 +615,7 @@ def test_name_clarification_resumes_full_qa_with_original_citation_context(tmp_p
                                     ],
                                 },
                                 {
-                                "text": named_claim,
+                                    "text": named_claim,
                                     "references": [
                                         {
                                             "evidence_id": chunk["evidence_id"],

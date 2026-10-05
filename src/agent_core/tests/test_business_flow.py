@@ -7,10 +7,11 @@ from zoneinfo import ZoneInfo
 
 import pytest
 
+from agent_core.core.agent import Agent
 from agent_core.core.business_flow import BusinessFlow
 from agent_core.core.message import Message
 from agent_core.providers import LLMResponse, ProviderAuthenticationError
-from agent_core.tests.fakes import FixedClock, create_test_agent
+from agent_core.tests.fakes import FixedClock
 from agent_core.understanding.service import UnderstandingService
 
 SESSION = str(uuid4())
@@ -352,9 +353,56 @@ def test_expired_task_is_rejected_before_provider_or_sql():
 
 def test_existing_agent_dispatches_chat_to_business_flow():
     flow, provider, sql = flow_for(READY)
-    agent = create_test_agent(provider)
-    agent._business_flow = flow
+    agent = Agent(
+        provider, name="Query Agent", clock=FixedClock(NOW), business_flow=flow
+    )
     result = asyncio.run(agent.process_message(request()))
     assert result.payload["status"] == "ok"
     assert len(sql.calls) == 1
     assert "Aria" not in provider.requests[0].messages[0].content
+
+
+def test_legacy_agent_requires_character_and_composer():
+    with pytest.raises(ValueError, match="Legacy chat requires"):
+        Agent(SequenceProvider(), clock=FixedClock(NOW))
+
+
+def test_same_session_can_retry_after_model_and_sql_failures():
+    flow, _, sql = flow_for(
+        ProviderAuthenticationError("secret-key"),
+        READY,
+        READY,
+        sql=FakeSQL(RuntimeError("secret-connection")),
+    )
+
+    async def scenario():
+        model_failure = await flow.process_message(request())
+        assert model_failure.payload["code"] == "UNDERSTANDING_UNAVAILABLE"
+        assert not sql.calls
+        sql_failure = await flow.process_message(request())
+        assert sql_failure.payload["code"] == "SQL_SERVICE_FAILED"
+        sql.result = OK
+        success = await flow.process_message(request())
+        assert success.payload["status"] == "ok"
+        assert "127.98" in success.payload["message"]
+        assert "secret-" not in model_failure.to_json() + sql_failure.to_json()
+
+    asyncio.run(scenario())
+
+
+def test_long_conversation_bounds_context_and_new_session_starts_empty():
+    flow, provider, sql = flow_for(*([READY] * 9))
+
+    async def scenario():
+        for turn in range(8):
+            result = await flow.process_message(request(f"查询问题 {turn}"))
+            assert result.payload["status"] == "ok"
+            history = json.loads(provider.requests[-1].messages[-1].content)["history"]
+            assert len(history) == min(turn, 6) * 2
+        assert history[0]["content"] == "查询问题 1"
+        await flow.process_message(request(session=str(uuid4())))
+        context = json.loads(provider.requests[-1].messages[-1].content)
+        assert context["history"] == [] and context["previous"] is None
+        assert len(sql.calls) == 9
+
+    asyncio.run(scenario())

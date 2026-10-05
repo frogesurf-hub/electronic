@@ -8,11 +8,9 @@ from agent_core.characters import (
     resolve_character,
 )
 from agent_core.communication import WebSocketServer
-from agent_core.composition import PromptContextComposer
 from agent_core.config import Settings, get_settings
 from agent_core.core.agent import Agent
 from agent_core.core.business_flow import BusinessFlow
-from agent_core.events import EventBus
 from agent_core.observability import setup_logging
 from agent_core.providers import ProviderConfigurationError
 from agent_core.providers.deepseek import DeepSeekProvider
@@ -84,7 +82,7 @@ def _create_provider(
 
 async def run() -> None:
     """
-    初始化并运行 Desktop Companion Agent Core。
+    初始化并运行比赛查询 Agent；旧角色与事件总线不参与启动。
     """
 
     settings = get_settings()
@@ -93,11 +91,6 @@ async def run() -> None:
         log_level=settings.log_level,
     )
 
-    active_character = _load_active_character(
-        settings,
-    )
-
-    composer = PromptContextComposer()
     clock = SystemClock()
 
     provider = _create_provider(
@@ -136,36 +129,25 @@ async def run() -> None:
     )
 
     try:
-        event_bus = EventBus(
-            queue_capacity=settings.event_bus_queue_capacity,
+        agent = Agent(
+            provider=provider,
+            name="Query Agent",
+            clock=clock,
+            business_flow=BusinessFlow(
+                UnderstandingService(provider),
+                SQLGenerationService(provider),
+                clock,
+                qa_service=DocumentQAService(provider),
+            ),
         )
 
-        try:
-            agent = Agent(
-                provider=provider,
-                character=active_character,
-                composer=composer,
-                clock=clock,
-                business_flow=BusinessFlow(
-                    UnderstandingService(provider),
-                    SQLGenerationService(provider),
-                    clock,
-                    qa_service=DocumentQAService(provider),
-                ),
-            )
+        server = WebSocketServer(
+            host=settings.websocket_host,
+            port=settings.websocket_port,
+            agent=agent,
+        )
 
-            server = WebSocketServer(
-                host=settings.websocket_host,
-                port=settings.websocket_port,
-                agent=agent,
-            )
-
-            await event_bus.start()
-
-            await server.run()
-
-        finally:
-            await event_bus.close()
+        await server.run()
 
     finally:
         await provider.aclose()
@@ -173,7 +155,7 @@ async def run() -> None:
 
 def main() -> None:
     """
-    Desktop Companion Agent Core 的同步程序入口。
+    比赛查询 Agent Core 的同步程序入口。
     """
 
     asyncio.run(

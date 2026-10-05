@@ -87,17 +87,8 @@ class Agent:
     """
     Agent 核心逻辑。
 
-    当前阶段负责：
-    - 接收协议 Message
-    - 转换为 Provider-neutral LLM 请求
-    - 调用注入的 LLM Provider
-    - 将 Provider 响应转换回协议 Message
-    - 将 Provider 错误转换为安全的协议 error Message
-
-    后续会继续接入：
-    - Memory
-    - Behavior
-    - Tool
+    比赛入口将 chat 交给统一 BusinessFlow 处理。
+    原陪伴聊天路径仍可显式注入 Character 和 Composer 使用。
     """
 
     def __init__(
@@ -105,11 +96,13 @@ class Agent:
         provider: LLMProvider,
         name: str = "Desktop Companion",
         *,
-        character: CharacterDefinition,
-        composer: PromptContextComposer,
+        character: CharacterDefinition | None = None,
+        composer: PromptContextComposer | None = None,
         clock: Clock,
         business_flow: "BusinessFlow | None" = None,
     ) -> None:
+        if business_flow is None and (character is None or composer is None):
+            raise ValueError("Legacy chat requires a character and composer")
         self.name = name
         self._provider = provider
         self._character = character
@@ -128,6 +121,7 @@ class Agent:
         if message.type == "chat":
             if self._business_flow is not None:
                 return await self._business_flow.process_message(message)
+            assert self._composer is not None and self._character is not None
             user_text = message.payload.get(
                 "message",
                 "",
