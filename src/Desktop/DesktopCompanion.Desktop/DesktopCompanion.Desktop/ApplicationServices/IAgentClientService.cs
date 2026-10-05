@@ -6,6 +6,8 @@ public interface IAgentClientService : IAsyncDisposable
 {
     bool IsConnected { get; }
 
+    void StartNewSession();
+
     event Action<AgentMessage>? MessageReceived;
 
     event Action<Exception>? ReceiveFailed;

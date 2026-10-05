@@ -49,11 +49,35 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
     public string CitationText => _citationText;
     public DataView ResultRows => _resultRows;
     public bool CanSend => IsConnected && !_isWaiting;
+    public bool CanStartNewSession => !_isWaiting;
 
     private void SetWaiting(bool waiting)
     {
         _isWaiting = waiting;
         OnPropertyChanged(nameof(CanSend));
+        OnPropertyChanged(nameof(CanStartNewSession));
+    }
+
+    public void StartNewSession()
+    {
+        if (!CanStartNewSession)
+        {
+            return;
+        }
+
+        _agentClientService.StartNewSession();
+        Messages.Clear();
+        InputText = string.Empty;
+        _resultStatus = "等待查询";
+        _querySql = string.Empty;
+        _queryDetails = string.Empty;
+        _citationText = string.Empty;
+        _resultRows = new DataTable().DefaultView;
+        OnPropertyChanged(nameof(ResultStatus));
+        OnPropertyChanged(nameof(QuerySql));
+        OnPropertyChanged(nameof(QueryDetails));
+        OnPropertyChanged(nameof(CitationText));
+        OnPropertyChanged(nameof(ResultRows));
     }
 
     public string InputText

@@ -23,7 +23,16 @@
                 BorderBrush="Gray"
                 CornerRadius="6">
 
-            <DockPanel>
+            <DockPanel LastChildFill="False">
+
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <Button Width="100" Height="30" Content="新建会话"
+                            Margin="0,0,10,0"
+                            IsEnabled="{Binding CanStartNewSession}"
+                            Click="NewSessionButton_Click" />
+                    <Button Width="100" Height="30" Content="连接"
+                            Click="ConnectButton_Click" />
+                </StackPanel>
 
                 <StackPanel DockPanel.Dock="Left"
                             Orientation="Horizontal">
@@ -37,12 +46,6 @@
                                VerticalAlignment="Center" />
 
                 </StackPanel>
-
-                <Button DockPanel.Dock="Right"
-                        Width="100"
-                        Height="30"
-                        Content="连接"
-                        Click="ConnectButton_Click" />
 
             </DockPanel>
 

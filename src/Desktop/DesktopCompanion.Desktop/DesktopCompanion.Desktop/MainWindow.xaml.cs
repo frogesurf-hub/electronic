@@ -36,6 +36,13 @@ public partial class MainWindow : Window
         }
     }
 
+    private void NewSessionButton_Click(
+        object sender,
+        RoutedEventArgs e)
+    {
+        _viewModel.StartNewSession();
+    }
+
     private async void SendButton_Click(
         object sender,
         RoutedEventArgs e)
