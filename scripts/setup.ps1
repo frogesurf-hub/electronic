@@ -13,7 +13,7 @@ try {
     $env:PIP_NO_INDEX = '0'
     & $ProjectPython -m pip install --no-cache-dir --only-binary=:all: --index-url https://pypi.org/simple --disable-pip-version-check -r (Join-Path $ProjectRoot 'requirements-dev.lock')
     Assert-LastCommand 'Installing the locked Python dependencies'
-    & $ProjectPython -m pip install --no-build-isolation --no-deps -e $ProjectRoot
+    & $ProjectPython -m pip install --no-cache-dir --disable-pip-version-check --no-build-isolation --no-deps -e $ProjectRoot
     Assert-LastCommand 'Installing the project'
 } finally {
     [Environment]::SetEnvironmentVariable('PIP_NO_INDEX', $PreviousNoIndex, 'Process')
