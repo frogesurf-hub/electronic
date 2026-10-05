@@ -129,6 +129,96 @@ def test_clarification_resumes_task_with_history_and_no_premature_sql():
     asyncio.run(scenario())
 
 
+@pytest.mark.parametrize("text", ["2024", "2024年", " 2024 年 "])
+def test_standalone_year_clarifies_intent_without_provider_or_sql(text):
+    flow, provider, sql = flow_for()
+    result = asyncio.run(flow.process_message(request(text)))
+    assert result.type == "response"
+    assert result.payload["status"] == "needs_clarification"
+    assert result.payload["problem_type"] == "undetermined"
+    assert result.payload["issues"][0]["code"] == "MISSING_INTENT"
+    assert "指标" in result.payload["message"]
+    assert not provider.requests and not sql.calls
+
+
+def test_metric_reply_resumes_year_first_task_and_supplies_time_to_understanding():
+    flow, provider, sql = flow_for({**READY, "continues_task": True})
+
+    async def scenario():
+        first = await flow.process_message(request("2024年"))
+        second = await flow.process_message(
+            request("美国销售额", task=first.payload["task_id"])
+        )
+        context = json.loads(provider.requests[0].messages[-1].content)
+        assert context["pending_clarification"] is True
+        assert context["previous"]["problem_type"] == "undetermined"
+        assert context["previous"]["time_range"] == READY["time_range"]
+        assert context["previous"]["metric_id"] is None
+        assert context["previous"]["filters"] == []
+        assert context["history"][0]["content"] == "2024年"
+        assert second.payload["task_id"] == first.payload["task_id"]
+        assert second.payload["status"] == "ok"
+        assert sql.calls[0][0]["time_range"] == READY["time_range"]
+        assert len(sql.calls) == 1
+
+    asyncio.run(scenario())
+
+
+def test_year_after_completed_query_does_not_inherit_metric_or_country():
+    flow, provider, sql = flow_for(READY, {**READY, "continues_task": True})
+
+    async def scenario():
+        completed = await flow.process_message(request())
+        first = await flow.process_message(request("2024年"))
+        assert first.payload["status"] == "needs_clarification"
+        assert first.payload["task_id"] != completed.payload["task_id"]
+        assert len(sql.calls) == 1 and len(provider.requests) == 1
+        await flow.process_message(request("美国销售额", task=first.payload["task_id"]))
+        context = json.loads(provider.requests[-1].messages[-1].content)
+        assert context["previous"]["metric_id"] is None
+        assert context["previous"]["filters"] == []
+
+    asyncio.run(scenario())
+
+
+def test_complete_new_question_can_replace_year_first_clarification():
+    fresh = {
+        **READY,
+        "continues_task": False,
+        "time_range": {"start": "2023-01-01", "end_exclusive": "2024-01-01"},
+        "filters": [],
+    }
+    flow, _, sql = flow_for(fresh)
+
+    async def scenario():
+        first = await flow.process_message(request("2024年"))
+        second = await flow.process_message(
+            request("改查 2023 年全球销售额", task=first.payload["task_id"])
+        )
+        assert second.payload["task_id"] != first.payload["task_id"]
+        assert second.payload["status"] == "ok"
+        assert sql.calls[0][0]["time_range"] == fresh["time_range"]
+        assert sql.calls[0][0]["filters"] == []
+
+    asyncio.run(scenario())
+
+
+def test_model_can_mark_other_incomplete_fragments_as_undetermined():
+    flow, _, sql = flow_for({"problem_type": "undetermined"})
+    result = asyncio.run(flow.process_message(request("美国")))
+    assert result.payload["status"] == "needs_clarification"
+    assert [item["code"] for item in result.payload["issues"]] == ["MISSING_INTENT"]
+    assert not sql.calls
+
+
+def test_unrelated_request_still_returns_unsupported_instead_of_clarifying():
+    flow, _, sql = flow_for({"problem_type": "unsupported"})
+    result = asyncio.run(flow.process_message(request("写一首诗")))
+    assert result.payload["status"] == "error"
+    assert result.payload["code"] == "UNSUPPORTED_REQUEST"
+    assert not sql.calls
+
+
 @pytest.mark.parametrize(
     "changes",
     [

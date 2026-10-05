@@ -118,7 +118,18 @@ class BusinessFlow:
             state.pending = False
             payload["problem_type"] = interpretation.problem_type
 
-            if interpretation.problem_type == "qa" and self._qa is not None:
+            if interpretation.problem_type == "undetermined":
+                state.pending = True
+                reason = (
+                    "你想查询什么指标（如销售额），还是查阅相关文档？请补充具体问题。"
+                )
+                payload.update(
+                    status="needs_clarification",
+                    issues=[{"code": "MISSING_INTENT", "reason": reason}],
+                    message=reason,
+                )
+                result = self._response(payload)
+            elif interpretation.problem_type == "qa" and self._qa is not None:
                 if interpretation.issues:
                     state.pending = True
                     payload.update(

@@ -11,6 +11,13 @@
 省略 session_id 时后端创建会话，客户端继续对话必须使用响应中的 session_id。
 会话暂存内存，重启或容量淘汰后清空；过期任务需重新提问。
 
+尚不能确定业务意图时，提取结果可为 `problem_type=undetermined`。
+公共入口返回 `status=needs_clarification`、`issues.code=MISSING_INTENT`，
+保存实际提供的时间等条件及待补充 task_id，不调用 SQL 或文档问答。
+无待补充任务时，仅输入四位年份（可带“年”）由本地规则保留明确的整年区间，
+不猜指标或筛选；待补充状态下的年份继续交给公共理解解析同一任务。
+用户补充后可确定 sql 或 qa 支线；非业务请求仍为 unsupported，未支持的指标仍拒绝。
+
 响应 payload 的共同字段：`message`（兼容原文字界面）、`status`、
 `problem_type`、`session_id`、`task_id`、`request_id`、`issues`、`citations`、`trace`。
 成功问数另有 `confirmed_query/source_id/metric_definition_id/columns/rows/sql/parameters/tables/truncated`。
