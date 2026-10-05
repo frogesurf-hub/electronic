@@ -70,7 +70,7 @@
         </ListBox>
 
         <GroupBox Grid.Row="2" Header="{Binding ResultStatus}" Margin="0,0,0,12">
-            <TabControl>
+            <TabControl SelectedIndex="{Binding SelectedResultTab, Mode=TwoWay}">
                 <TabItem Header="原文引用">
                     <TextBox Text="{Binding CitationText, Mode=OneWay}" IsReadOnly="True"
                              TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />

@@ -23,6 +23,7 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
     private string _querySql = string.Empty;
     private string _queryDetails = string.Empty;
     private string _citationText = string.Empty;
+    private int _selectedResultTab;
     private DataView _resultRows = new DataTable().DefaultView;
 
     public MainWindowViewModel(
@@ -51,6 +52,21 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
     public bool CanSend => IsConnected && !_isWaiting;
     public bool CanStartNewSession => !_isWaiting;
 
+    public int SelectedResultTab
+    {
+        get => _selectedResultTab;
+        set
+        {
+            if (_selectedResultTab == value)
+            {
+                return;
+            }
+
+            _selectedResultTab = value;
+            OnPropertyChanged();
+        }
+    }
+
     private void SetWaiting(bool waiting)
     {
         _isWaiting = waiting;
@@ -73,6 +89,7 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
         _queryDetails = string.Empty;
         _citationText = string.Empty;
         _resultRows = new DataTable().DefaultView;
+        SelectedResultTab = 0;
         OnPropertyChanged(nameof(ResultStatus));
         OnPropertyChanged(nameof(QuerySql));
         OnPropertyChanged(nameof(QueryDetails));
@@ -310,6 +327,12 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
             }
         }
         _resultRows = table.DefaultView;
+        SelectedResultTab = payload["status"]?.ToString() switch
+        {
+            "ok" or "partial" when !string.IsNullOrWhiteSpace(_citationText) => 0,
+            "ok" or "partial" when table.Columns.Count > 0 => 1,
+            _ => 3,
+        };
         OnPropertyChanged(nameof(ResultStatus));
         OnPropertyChanged(nameof(QuerySql));
         OnPropertyChanged(nameof(QueryDetails));
