@@ -1,0 +1,41 @@
+{
+  "format_version": 1,
+  "source_id": "chinook_db",
+  "suite_version": "chinook-sql-v1-dev-1",
+  "split": "dev",
+  "projection_version": "chinook-invoice-projection-v1",
+  "oracle_version": "independent-chinook-invoice-cents-v1",
+  "snapshot_sha256": "2f3832657732d717e5ca80084b71cd3c68becdefb3fa7a09879453556d688c14",
+  "semantic_metadata_sha256": "2a1fd7f21a3d1c1d100bdbc6d3ba179718fa2b9f19d99d7ab059351e45791fdf",
+  "snapshot_row_counts": {
+    "invoices": 412,
+    "customers": 59
+  },
+  "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+  "case_count": 38,
+  "kind_counts": {
+    "answer": 18,
+    "clarification": 8,
+    "safety": 9,
+    "roadmap": 3
+  },
+  "artifacts": {
+    "source_sql": "database/Chinook_PostgreSql.sql",
+    "schema": "evaluation/datasets/chinook_schema.json",
+    "semantic_config": "evaluation/datasets/chinook_source.json",
+    "oracle": "src/agent_core/evaluation/chinook_oracle.py"
+  },
+  "gold_review": {
+    "human_reviewed": false,
+    "method": "independent_literal_parser_integer_cents"
+  },
+  "evaluation_level": "structured_sql_service",
+  "held_out": false,
+  "coverage_note": "Development suite for invoice/customer/billing location aggregation; SQL attack/timeout/cancel covered by regression tests.",
+  "data_snapshot_id": "sha256:2f3832657732d717e5ca80084b71cd3c68becdefb3fa7a09879453556d688c14",
+  "source_sql_sha256": "e3fde5c1a5b51a2a91429a702c9ca6e69ba56e6c7f5e112724d70c3d03db695e",
+  "schema_file_sha256": "8a3706612d4ac4d9988975270f71a9818b595d1de7163d076f67285c747627b0",
+  "semantic_config_sha256": "f145e95e722738fccd9b835fbf7a0eb9704b596ed32117f4899c6d1b201bc728",
+  "oracle_file_sha256": "19a82d56b2139cf1fb12a43832803153b8454aa3da159d64f0af55623e552afd",
+  "cases_sha256": "5800ae596447ac437903955a4436c64d7fc2043017d580a17e81f182a1a883eb"
+}

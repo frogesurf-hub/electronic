@@ -1,0 +1,38 @@
+{
+  "source_id": "chinook_db",
+  "dialect": "postgresql",
+  "hosting": "local_postgresql",
+  "database": "chinook",
+  "timezone": "Asia/Shanghai",
+  "currency": null,
+  "reader_role": "chinook_reader",
+  "connection_file": ".local/connection_chinook.json",
+  "connection_environment": [
+    "PGHOST",
+    "PGPORT",
+    "PGDATABASE",
+    "PGUSER",
+    "PGPASSWORD",
+    "PGSSLMODE"
+  ],
+  "statement_timeout_ms": 5000,
+  "max_result_rows": 1000,
+  "query_table_allowlist": [
+    "public.album",
+    "public.artist",
+    "public.customer",
+    "public.employee",
+    "public.genre",
+    "public.invoice",
+    "public.invoice_line",
+    "public.media_type",
+    "public.playlist",
+    "public.playlist_track",
+    "public.track"
+  ],
+  "metadata_tables": [],
+  "evidence_tables": [],
+  "note": "Chinook 1.4.5 音乐商店数据库，连接已有本地 PostgreSQL 127.0.0.1:5432；发票日期为无时区时间，金额不假定币种。应用使用独立只读角色。",
+  "dataset": "chinook",
+  "amount_unit": "金额"
+}

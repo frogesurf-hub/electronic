@@ -1,0 +1,6 @@
+# Preserve the imported, reviewed teammate files byte for byte on checkout.
+/database/** -text
+/evaluation/** -text
+/src/agent_core/sql/** -text
+/src/agent_core/evaluation/** -text
+/tests/** -text

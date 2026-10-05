@@ -25,3 +25,7 @@ logs/
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
+
+# Machine-local database credentials, cluster, and setup reports
+.local/
+database/migration/

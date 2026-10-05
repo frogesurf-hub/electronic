@@ -1,0 +1,148 @@
+{
+  "verified_at": "2026-10-04T08:18:22.990641+00:00",
+  "dataset": "chinook",
+  "source_id": "chinook_db",
+  "database": "chinook",
+  "host": "127.0.0.1",
+  "port": 5432,
+  "reader_role": "chinook_reader",
+  "facts": {
+    "row_counts": {
+      "album": 347,
+      "artist": 275,
+      "customer": 59,
+      "employee": 8,
+      "genre": 25,
+      "invoice": 412,
+      "invoice_line": 2240,
+      "media_type": 5,
+      "playlist": 18,
+      "playlist_track": 8715,
+      "track": 3503
+    },
+    "tables": 11,
+    "foreign_keys": 11,
+    "invoice_date_min": "2021-01-01T00:00:00",
+    "invoice_date_max": "2025-12-22T00:00:00",
+    "invoice_total": "2328.60"
+  },
+  "real_business_queries": [
+    {
+      "case": "2024_usa",
+      "actual": "127.98",
+      "matches_oracle": true,
+      "execution_attempted": true
+    },
+    {
+      "case": "country_in",
+      "actual": "170.55",
+      "matches_oracle": true,
+      "execution_attempted": true
+    },
+    {
+      "case": "customer_eq",
+      "actual": "15.84",
+      "matches_oracle": true,
+      "execution_attempted": true
+    },
+    {
+      "case": "customer_in",
+      "actual": "16.83",
+      "matches_oracle": true,
+      "execution_attempted": true
+    }
+  ],
+  "async_fixed_provider_query": {
+    "status": "ok",
+    "validation_status": "passed",
+    "execution_attempted": true,
+    "rows": [
+      {
+        "sales_amount": "127.98"
+      }
+    ],
+    "matches_oracle": true,
+    "provider_mode": "fixed_example_only",
+    "no_model_api_called": true
+  },
+  "no_model_api_called": true,
+  "clarification_checks": [
+    {
+      "case": "missing_time",
+      "status": "needs_clarification",
+      "issue_codes": [
+        "MISSING_TIME_RANGE"
+      ],
+      "execution_attempted": false
+    },
+    {
+      "case": "empty_country",
+      "status": "needs_clarification",
+      "issue_codes": [
+        "MISSING_FILTER_VALUE"
+      ],
+      "execution_attempted": false
+    },
+    {
+      "case": "empty_country",
+      "status": "needs_clarification",
+      "issue_codes": [
+        "MISSING_FILTER_VALUE"
+      ],
+      "execution_attempted": false
+    },
+    {
+      "case": "empty_country",
+      "status": "needs_clarification",
+      "issue_codes": [
+        "MISSING_FILTER_VALUE"
+      ],
+      "execution_attempted": false
+    },
+    {
+      "case": "unknown_country",
+      "status": "needs_clarification",
+      "issue_codes": [
+        "UNKNOWN_ENTITY"
+      ],
+      "execution_attempted": false
+    },
+    {
+      "case": "unknown_city",
+      "status": "needs_clarification",
+      "issue_codes": [
+        "UNKNOWN_ENTITY"
+      ],
+      "execution_attempted": false
+    },
+    {
+      "case": "offset_time",
+      "status": "needs_clarification",
+      "issue_codes": [
+        "AMBIGUOUS_TIME_SEMANTICS"
+      ],
+      "execution_attempted": false
+    },
+    {
+      "case": "injection_country",
+      "status": "needs_clarification",
+      "issue_codes": [
+        "UNKNOWN_ENTITY"
+      ],
+      "execution_attempted": false
+    },
+    {
+      "case": "same_name_fixture",
+      "status": "needs_clarification",
+      "issue_codes": [
+        "AMBIGUOUS_ENTITY"
+      ],
+      "execution_attempted": false,
+      "fixture_only": true
+    }
+  ],
+  "readonly_update_blocked": true,
+  "parameterized_injection_query_returned_zero": true,
+  "currency_assumed": null,
+  "source_config_switched": true
+}

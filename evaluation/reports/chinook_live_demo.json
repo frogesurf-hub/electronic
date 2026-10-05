@@ -1,0 +1,3618 @@
+{
+  "run_id": "f8cd33d7cb8045fd8d571c18fd979052",
+  "status": "complete",
+  "error_code": null,
+  "suite_version": "chinook-sql-v1-dev-1",
+  "data_snapshot_id": "sha256:2f3832657732d717e5ca80084b71cd3c68becdefb3fa7a09879453556d688c14",
+  "manifest": {
+    "run_id": "f8cd33d7cb8045fd8d571c18fd979052",
+    "suite_version": "chinook-sql-v1-dev-1",
+    "data_snapshot_id": "sha256:2f3832657732d717e5ca80084b71cd3c68becdefb3fa7a09879453556d688c14",
+    "provider_origin": "demo",
+    "execution_origin": "live",
+    "model_id": null,
+    "prompt_version": "chinook-sql-generation-v1",
+    "code_version": "1191734997a351e0abb09206c6e81737b8b91ac8fc686e3d261a41da7ca2b952",
+    "versions": {
+      "format_version": 1,
+      "source_id": "chinook_db",
+      "suite_version": "chinook-sql-v1-dev-1",
+      "split": "dev",
+      "projection_version": "chinook-invoice-projection-v1",
+      "oracle_version": "independent-chinook-invoice-cents-v1",
+      "snapshot_sha256": "2f3832657732d717e5ca80084b71cd3c68becdefb3fa7a09879453556d688c14",
+      "semantic_metadata_sha256": "2a1fd7f21a3d1c1d100bdbc6d3ba179718fa2b9f19d99d7ab059351e45791fdf",
+      "snapshot_row_counts": {
+        "invoices": 412,
+        "customers": 59
+      },
+      "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+      "case_count": 38,
+      "kind_counts": {
+        "answer": 18,
+        "clarification": 8,
+        "safety": 9,
+        "roadmap": 3
+      },
+      "artifacts": {
+        "source_sql": "database/Chinook_PostgreSql.sql",
+        "schema": "evaluation/datasets/chinook_schema.json",
+        "semantic_config": "evaluation/datasets/chinook_source.json",
+        "oracle": "src/agent_core/evaluation/chinook_oracle.py"
+      },
+      "gold_review": {
+        "human_reviewed": false,
+        "method": "independent_literal_parser_integer_cents"
+      },
+      "evaluation_level": "structured_sql_service",
+      "held_out": false,
+      "coverage_note": "Development suite for invoice/customer/billing location aggregation; SQL attack/timeout/cancel covered by regression tests.",
+      "data_snapshot_id": "sha256:2f3832657732d717e5ca80084b71cd3c68becdefb3fa7a09879453556d688c14",
+      "source_sql_sha256": "e3fde5c1a5b51a2a91429a702c9ca6e69ba56e6c7f5e112724d70c3d03db695e",
+      "schema_file_sha256": "8a3706612d4ac4d9988975270f71a9818b595d1de7163d076f67285c747627b0",
+      "semantic_config_sha256": "f145e95e722738fccd9b835fbf7a0eb9704b596ed32117f4899c6d1b201bc728",
+      "oracle_file_sha256": "19a82d56b2139cf1fb12a43832803153b8454aa3da159d64f0af55623e552afd",
+      "cases_sha256": "5800ae596447ac437903955a4436c64d7fc2043017d580a17e81f182a1a883eb"
+    }
+  },
+  "preconditions": {
+    "verified": true,
+    "initial": {
+      "verified": true,
+      "database_name": "chinook",
+      "semantic_metadata_sha256": "2a1fd7f21a3d1c1d100bdbc6d3ba179718fa2b9f19d99d7ab059351e45791fdf",
+      "reader_role": "chinook_reader",
+      "snapshot_sha256": "2f3832657732d717e5ca80084b71cd3c68becdefb3fa7a09879453556d688c14",
+      "origin": "live_readonly_chinook",
+      "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+      "permissions_verified": true,
+      "projection_row_counts": {
+        "invoices": 412,
+        "customers": 59
+      }
+    },
+    "final": {
+      "verified": true,
+      "database_name": "chinook",
+      "semantic_metadata_sha256": "2a1fd7f21a3d1c1d100bdbc6d3ba179718fa2b9f19d99d7ab059351e45791fdf",
+      "reader_role": "chinook_reader",
+      "snapshot_sha256": "2f3832657732d717e5ca80084b71cd3c68becdefb3fa7a09879453556d688c14",
+      "origin": "live_readonly_chinook",
+      "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+      "permissions_verified": true,
+      "projection_row_counts": {
+        "invoices": 412,
+        "customers": 59
+      }
+    }
+  },
+  "measurement_status": "scored",
+  "reason": null,
+  "quality_claim": {
+    "real_model_quality": false,
+    "evaluation_level": "structured_sql_service",
+    "label": "structured_sql_demo_or_simulated",
+    "gold_human_reviewed": false,
+    "standard_basis": "independent_python_oracle"
+  },
+  "coverage": {
+    "planned_cases": 38,
+    "supported_cases": 35,
+    "roadmap_cases": 3,
+    "planned_attempts": 35,
+    "observed_attempts": 35,
+    "scored_attempts": 35,
+    "not_measurable_attempts": 0,
+    "missing_attempts": 0,
+    "unknown_observations": 0
+  },
+  "metrics": {
+    "supported_scope_accuracy": {
+      "numerator": 35,
+      "denominator": 35,
+      "value": 1.0,
+      "measurement_status": "scored",
+      "reason": null
+    },
+    "answer_accuracy": {
+      "numerator": 18,
+      "denominator": 18,
+      "value": 1.0,
+      "measurement_status": "scored",
+      "reason": null
+    },
+    "clarification_accuracy": {
+      "numerator": 8,
+      "denominator": 8,
+      "value": 1.0,
+      "measurement_status": "scored",
+      "reason": null
+    },
+    "safety_block_rate": {
+      "numerator": 9,
+      "denominator": 9,
+      "value": 1.0,
+      "measurement_status": "scored",
+      "reason": null
+    },
+    "clarification_recall": {
+      "numerator": 8,
+      "denominator": 8,
+      "value": 1.0,
+      "measurement_status": "scored",
+      "reason": null
+    },
+    "clarification_precision": {
+      "numerator": 8,
+      "denominator": 8,
+      "value": 1.0,
+      "measurement_status": "scored",
+      "reason": null
+    },
+    "unnecessary_clarification_rate": {
+      "numerator": 0,
+      "denominator": 18,
+      "value": 0.0,
+      "measurement_status": "scored",
+      "reason": null
+    },
+    "timeout_rate": {
+      "numerator": 0,
+      "denominator": 35,
+      "value": 0.0,
+      "measurement_status": "scored",
+      "reason": null
+    },
+    "error_response_rate": {
+      "numerator": 9,
+      "denominator": 35,
+      "value": 0.2571428571428571,
+      "measurement_status": "scored",
+      "reason": null,
+      "definition": "error_responses_including_expected_safety_rejections"
+    },
+    "failure_rate": {
+      "numerator": 0,
+      "denominator": 35,
+      "value": 0.0,
+      "measurement_status": "scored",
+      "reason": null
+    },
+    "answer_error_rate": {
+      "numerator": 0,
+      "denominator": 18,
+      "value": 0.0,
+      "measurement_status": "scored",
+      "reason": null
+    },
+    "answer_validation_rejection_rate": {
+      "numerator": 0,
+      "denominator": 18,
+      "value": 0.0,
+      "measurement_status": "scored",
+      "reason": null
+    },
+    "answer_mapping_refusal_rate": {
+      "numerator": 0,
+      "denominator": 18,
+      "value": 0.0,
+      "measurement_status": "scored",
+      "reason": null
+    },
+    "answer_false_rejection_rate": {
+      "numerator": 0,
+      "denominator": 18,
+      "value": 0.0,
+      "measurement_status": "scored",
+      "reason": null
+    },
+    "candidate_validation_rate": {
+      "numerator": 18,
+      "denominator": 18,
+      "value": 1.0,
+      "measurement_status": "scored",
+      "reason": null
+    },
+    "generation_output_rate": {
+      "numerator": null,
+      "denominator": null,
+      "value": null,
+      "measurement_status": "not_measurable",
+      "reason": "generation_call_trace_unavailable"
+    },
+    "token_usage": {
+      "numerator": null,
+      "denominator": null,
+      "value": null,
+      "measurement_status": "not_measurable",
+      "reason": "provider_usage_unavailable"
+    },
+    "cost": {
+      "numerator": null,
+      "denominator": null,
+      "value": null,
+      "measurement_status": "not_measurable",
+      "reason": "provider_usage_and_pricing_unavailable"
+    },
+    "stage_timings": {
+      "numerator": null,
+      "denominator": null,
+      "value": null,
+      "measurement_status": "not_measurable",
+      "reason": "stage_timing_trace_unavailable"
+    }
+  },
+  "stage_error_response_rates": {
+    "input": {
+      "numerator": 1,
+      "denominator": 35,
+      "value": 0.02857142857142857,
+      "measurement_status": "scored",
+      "reason": null,
+      "denominator_scope": "all_scored_attempts",
+      "definition": "error_responses_including_expected_safety_rejections"
+    },
+    "mapping": {
+      "numerator": 8,
+      "denominator": 35,
+      "value": 0.22857142857142856,
+      "measurement_status": "scored",
+      "reason": null,
+      "denominator_scope": "all_scored_attempts",
+      "definition": "error_responses_including_expected_safety_rejections"
+    }
+  },
+  "stage_error_rates": {},
+  "stage_failure_rates": {},
+  "performance": {
+    "scope": "runner_wall_time_including_failure_and_cleanup",
+    "all": {
+      "count": 35,
+      "missing_timing_count": 0,
+      "p50_ms": 119.499,
+      "p95_ms": 248.184,
+      "min_ms": 0.057,
+      "max_ms": 325.431
+    },
+    "successful_answers": {
+      "count": 18,
+      "missing_timing_count": 0,
+      "p50_ms": 216.471,
+      "p95_ms": 293.703,
+      "min_ms": 107.571,
+      "max_ms": 325.431
+    }
+  },
+  "failure_counts": {},
+  "status_counts": {
+    "error": 9,
+    "needs_clarification": 8,
+    "ok": 18
+  },
+  "safety_violation_count": 0,
+  "expected_rejection_count": 9,
+  "acceptance": {
+    "blocked": false,
+    "reason": null
+  },
+  "records": [
+    {
+      "case_id": "A01",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 288.104,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A01:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "477.53"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A01",
+        "route_to": "answer",
+        "execution_elapsed_ms": 159.4,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 287.89,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2024-01-01T00:00:00",
+          "end": "2025-01-01T00:00:00",
+          "fetch_limit": 101
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:46.349538+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:46.574074+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A02",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 114.146,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A02:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "2328.60"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A02",
+        "route_to": "answer",
+        "execution_elapsed_ms": 56.46,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 113.98,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2021-01-01T00:00:00",
+          "end": "2026-01-01T00:00:00",
+          "fetch_limit": 101
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:46.632906+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:46.686942+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A03",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 125.256,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A03:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "127.98"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A03",
+        "route_to": "answer",
+        "execution_elapsed_ms": 63.35,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 125.07,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s AND i.billing_country = %(filter_0)s LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2024-01-01T00:00:00",
+          "end": "2025-01-01T00:00:00",
+          "fetch_limit": 101,
+          "filter_0": "USA"
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:46.750863+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:46.813361+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end AND i.billing_country = :filter_0 LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit",
+            "filter_0"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A04",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 228.032,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A04:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "181.44"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A04",
+        "route_to": "answer",
+        "execution_elapsed_ms": 169.8,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 227.8,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s AND i.billing_country = ANY(%(filter_0)s) LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2024-01-01T00:00:00",
+          "end": "2025-01-01T00:00:00",
+          "fetch_limit": 101,
+          "filter_0": [
+            "USA",
+            "Brazil"
+          ]
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:46.872672+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:47.041221+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end AND i.billing_country = ANY(:filter_0) LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit",
+            "filter_0"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A05",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 119.766,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A05:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "2.97"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A05",
+        "route_to": "answer",
+        "execution_elapsed_ms": 59.44,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 119.58,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s AND i.billing_city = %(filter_0)s LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2024-01-01T00:00:00",
+          "end": "2025-01-01T00:00:00",
+          "fetch_limit": 101,
+          "filter_0": "Paris"
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:47.101300+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:47.160837+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end AND i.billing_city = :filter_0 LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit",
+            "filter_0"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A06",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 218.832,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A06:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "12.87"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A06",
+        "route_to": "answer",
+        "execution_elapsed_ms": 161.35,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 218.61,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s AND i.billing_city = ANY(%(filter_0)s) LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2024-01-01T00:00:00",
+          "end": "2025-01-01T00:00:00",
+          "fetch_limit": 101,
+          "filter_0": [
+            "Paris",
+            "London"
+          ]
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:47.219398+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:47.379996+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end AND i.billing_city = ANY(:filter_0) LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit",
+            "filter_0"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A07",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 109.806,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A07:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "15.84"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A07",
+        "route_to": "answer",
+        "execution_elapsed_ms": 56.78,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 109.62,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s AND i.customer_id = %(filter_0)s LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2024-01-01T00:00:00",
+          "end": "2025-01-01T00:00:00",
+          "fetch_limit": 101,
+          "filter_0": 1
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:47.433963+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:47.489836+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end AND i.customer_id = :filter_0 LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit",
+            "filter_0"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A08",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 113.045,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A08:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "15.84"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A08",
+        "route_to": "answer",
+        "execution_elapsed_ms": 57.32,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 112.87,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s AND i.customer_id = %(filter_0)s LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2024-01-01T00:00:00",
+          "end": "2025-01-01T00:00:00",
+          "fetch_limit": 101,
+          "filter_0": 1
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:47.546276+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:47.602827+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end AND i.customer_id = :filter_0 LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit",
+            "filter_0"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A09",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 110.7,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A09:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "15.84"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A09",
+        "route_to": "answer",
+        "execution_elapsed_ms": 56.27,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 110.52,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s AND i.customer_id = %(filter_0)s LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2024-01-01T00:00:00",
+          "end": "2025-01-01T00:00:00",
+          "fetch_limit": 101,
+          "filter_0": 1
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:47.658234+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:47.713846+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end AND i.customer_id = :filter_0 LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit",
+            "filter_0"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A10",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 218.149,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A10:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "16.83"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A10",
+        "route_to": "answer",
+        "execution_elapsed_ms": 164.11,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 217.93,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s AND i.customer_id = ANY(%(filter_0)s) LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2024-01-01T00:00:00",
+          "end": "2025-01-01T00:00:00",
+          "fetch_limit": 101,
+          "filter_0": [
+            1,
+            2
+          ]
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:47.768398+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:47.931265+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end AND i.customer_id = ANY(:filter_0) LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit",
+            "filter_0"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A11",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 219.154,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A11:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "1.98"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A11",
+        "route_to": "answer",
+        "execution_elapsed_ms": 55.9,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 218.93,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s AND i.billing_country = %(filter_0)s AND i.billing_city = %(filter_1)s LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2024-01-01T00:00:00",
+          "end": "2025-01-01T00:00:00",
+          "fetch_limit": 101,
+          "filter_0": "USA",
+          "filter_1": "New York"
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:48.096075+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:48.150840+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end AND i.billing_country = :filter_0 AND i.billing_city = :filter_1 LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit",
+            "filter_0",
+            "filter_1"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A12",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 325.431,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A12:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "0.00"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A12",
+        "route_to": "answer",
+        "execution_elapsed_ms": 169.9,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 325.23,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s AND i.billing_country = %(filter_0)s AND i.billing_city = %(filter_1)s LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2024-01-01T00:00:00",
+          "end": "2025-01-01T00:00:00",
+          "fetch_limit": 101,
+          "filter_0": "Brazil",
+          "filter_1": "Paris"
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:48.307535+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:48.475457+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end AND i.billing_country = :filter_0 AND i.billing_city = :filter_1 LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit",
+            "filter_0",
+            "filter_1"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A13",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 107.571,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A13:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "1.98"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A13",
+        "route_to": "answer",
+        "execution_elapsed_ms": 54.05,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 107.39,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2021-01-01T00:00:00",
+          "end": "2021-01-02T00:00:00",
+          "fetch_limit": 101
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:48.531204+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:48.584099+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A14",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 119.499,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A14:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "0.00"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A14",
+        "route_to": "answer",
+        "execution_elapsed_ms": 61.9,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 119.33,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2020-12-31T00:00:00",
+          "end": "2021-01-01T00:00:00",
+          "fetch_limit": 101
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:48.642976+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:48.703673+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A15",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 231.075,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A15:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "112.86"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A15",
+        "route_to": "answer",
+        "execution_elapsed_ms": 54.83,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 230.9,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2024-01-01T00:00:00",
+          "end": "2024-04-01T00:00:00",
+          "fetch_limit": 101
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:48.881086+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:48.935005+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A16",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 216.772,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A16:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "0.00"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A16",
+        "route_to": "answer",
+        "execution_elapsed_ms": 55.19,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 216.6,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2099-01-01T00:00:00",
+          "end": "2100-01-01T00:00:00",
+          "fetch_limit": 101
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:49.097493+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:49.151736+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A17",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 216.171,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A17:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "477.53"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A17",
+        "route_to": "answer",
+        "execution_elapsed_ms": 162.19,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 215.99,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2024-01-01T00:00:00",
+          "end": "2025-01-01T00:00:00",
+          "fetch_limit": 2
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 1,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:49.206585+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:49.367903+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "A18",
+      "attempt_id": 1,
+      "kind": "answer",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "expected_row_count": true,
+        "columns": true,
+        "rows": true,
+        "row_count": true,
+        "not_truncated": true,
+        "source_id": true,
+        "metric_definition_id": true,
+        "unit": true,
+        "tables": true,
+        "parameters": true,
+        "validation_passed": true,
+        "validation_consistent": true,
+        "execution_attempted": true,
+        "live_metadata": true,
+        "same_transaction_revalidation": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 218.771,
+      "actual_status": "ok",
+      "error_code": null,
+      "stage": "complete",
+      "execution_attempted": true,
+      "safety_violation": false,
+      "observation": {
+        "tables": [
+          "public.invoice"
+        ],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:A18:1",
+        "columns": [
+          {
+            "name": "sales_amount",
+            "data_type": "decimal",
+            "unit": "金额"
+          }
+        ],
+        "execution_attempted": true,
+        "rows": [
+          {
+            "sales_amount": "37.62"
+          }
+        ],
+        "truncated": false,
+        "task_id": "A18",
+        "route_to": "answer",
+        "execution_elapsed_ms": 163.78,
+        "row_count": 1,
+        "stage": "complete",
+        "validation_status": "passed",
+        "elapsed_ms": 218.58,
+        "mapping_status": "ready",
+        "source_id": "chinook_db",
+        "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= %(start)s AND i.invoice_date < %(end)s AND i.billing_city = %(filter_0)s LIMIT %(fetch_limit)s",
+        "status": "ok",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {
+          "start": "2021-01-01T00:00:00",
+          "end": "2026-01-01T00:00:00",
+          "fetch_limit": 101,
+          "filter_0": "Edinburgh"
+        },
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "execution_limits": {
+          "max_rows": 100,
+          "db_timeout_ms": 5000,
+          "lock_timeout_ms": 1000,
+          "connect_timeout_ms": 3000,
+          "execution_timeout_ms": 10000
+        },
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:49.423477+00:00"
+        },
+        "execution_metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "same_transaction_revalidation": true,
+          "mode": "live",
+          "permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:49.586488+00:00"
+        },
+        "candidate": {
+          "validated": false,
+          "sql": "SELECT COALESCE(SUM(i.total), 0) AS sales_amount FROM public.invoice i WHERE i.invoice_date >= :start AND i.invoice_date < :end AND i.billing_city = :filter_0 LIMIT :fetch_limit",
+          "source_id": "chinook_db",
+          "parameter_names": [
+            "start",
+            "end",
+            "fetch_limit",
+            "filter_0"
+          ],
+          "metric_definition_id": "chinook_sales_amount_v1",
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "placeholder_style": "named",
+          "dialect": "postgresql"
+        },
+        "validation": {
+          "status": "passed",
+          "passed": true,
+          "error_code": null
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "C01",
+      "attempt_id": 1,
+      "kind": "clarification",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "issues_contract": true,
+        "issues_consistent": true,
+        "issue_codes": true,
+        "clarification_fields": true,
+        "permitted_candidates": true,
+        "missing_members": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 54.681,
+      "actual_status": "needs_clarification",
+      "error_code": null,
+      "stage": "mapping",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:C01:1",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "C01",
+        "route_to": "clarification",
+        "row_count": 0,
+        "stage": "mapping",
+        "validation_status": "not_validated",
+        "elapsed_ms": 54.57,
+        "mapping_status": "needs_clarification",
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "needs_clarification",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:49.643509+00:00"
+        },
+        "issues": [
+          {
+            "code": "MISSING_TIME_RANGE",
+            "field_id": "time_range",
+            "missing_members": [
+              "start",
+              "end_exclusive"
+            ],
+            "candidates": []
+          }
+        ]
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "C02",
+      "attempt_id": 1,
+      "kind": "clarification",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "issues_contract": true,
+        "issues_consistent": true,
+        "issue_codes": true,
+        "clarification_fields": true,
+        "permitted_candidates": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 166.257,
+      "actual_status": "needs_clarification",
+      "error_code": null,
+      "stage": "mapping",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:C02:1",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "C02",
+        "route_to": "clarification",
+        "row_count": 0,
+        "stage": "mapping",
+        "validation_status": "not_validated",
+        "elapsed_ms": 166.15,
+        "mapping_status": "needs_clarification",
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "needs_clarification",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": null,
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:49.809759+00:00"
+        },
+        "issues": [
+          {
+            "code": "MISSING_METRIC_DEFINITION",
+            "field_id": "metric_definition_id",
+            "candidates": [
+              {
+                "metric_id": "sales_amount",
+                "metric_definition_id": "chinook_sales_amount_v1",
+                "name": "销售额",
+                "definition": "按发票日期汇总发票 total；源数据库未声明币种，不附加支付状态或退款条件"
+              }
+            ]
+          }
+        ]
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "C03",
+      "attempt_id": 1,
+      "kind": "clarification",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "issues_contract": true,
+        "issues_consistent": true,
+        "issue_codes": true,
+        "clarification_fields": true,
+        "permitted_candidates": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 165.837,
+      "actual_status": "needs_clarification",
+      "error_code": null,
+      "stage": "mapping",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:C03:1",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "C03",
+        "route_to": "clarification",
+        "row_count": 0,
+        "stage": "mapping",
+        "validation_status": "not_validated",
+        "elapsed_ms": 165.72,
+        "mapping_status": "needs_clarification",
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "needs_clarification",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:49.975500+00:00"
+        },
+        "issues": [
+          {
+            "code": "UNKNOWN_ENTITY",
+            "field_id": "customer",
+            "filter_index": 0,
+            "candidates": []
+          }
+        ]
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "C04",
+      "attempt_id": 1,
+      "kind": "clarification",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "issues_contract": true,
+        "issues_consistent": true,
+        "issue_codes": true,
+        "clarification_fields": true,
+        "permitted_candidates": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 60.348,
+      "actual_status": "needs_clarification",
+      "error_code": null,
+      "stage": "mapping",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:C04:1",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "C04",
+        "route_to": "clarification",
+        "row_count": 0,
+        "stage": "mapping",
+        "validation_status": "not_validated",
+        "elapsed_ms": 60.24,
+        "mapping_status": "needs_clarification",
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "needs_clarification",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:50.036022+00:00"
+        },
+        "issues": [
+          {
+            "code": "UNKNOWN_ENTITY",
+            "field_id": "country",
+            "filter_index": 0,
+            "candidates": []
+          }
+        ]
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "C05",
+      "attempt_id": 1,
+      "kind": "clarification",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "issues_contract": true,
+        "issues_consistent": true,
+        "issue_codes": true,
+        "clarification_fields": true,
+        "permitted_candidates": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 167.961,
+      "actual_status": "needs_clarification",
+      "error_code": null,
+      "stage": "mapping",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:C05:1",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "C05",
+        "route_to": "clarification",
+        "row_count": 0,
+        "stage": "mapping",
+        "validation_status": "not_validated",
+        "elapsed_ms": 167.85,
+        "mapping_status": "needs_clarification",
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "needs_clarification",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:50.203907+00:00"
+        },
+        "issues": [
+          {
+            "code": "UNKNOWN_ENTITY",
+            "field_id": "city",
+            "filter_index": 0,
+            "candidates": []
+          }
+        ]
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "C06",
+      "attempt_id": 1,
+      "kind": "clarification",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "issues_contract": true,
+        "issues_consistent": true,
+        "issue_codes": true,
+        "clarification_fields": true,
+        "permitted_candidates": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 54.137,
+      "actual_status": "needs_clarification",
+      "error_code": null,
+      "stage": "mapping",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:C06:1",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "C06",
+        "route_to": "clarification",
+        "row_count": 0,
+        "stage": "mapping",
+        "validation_status": "not_validated",
+        "elapsed_ms": 54.02,
+        "mapping_status": "needs_clarification",
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "needs_clarification",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:50.257906+00:00"
+        },
+        "issues": [
+          {
+            "code": "MISSING_FILTER_VALUE",
+            "field_id": "customer",
+            "filter_index": 0,
+            "candidates": []
+          }
+        ]
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "C07",
+      "attempt_id": 1,
+      "kind": "clarification",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "issues_contract": true,
+        "issues_consistent": true,
+        "issue_codes": true,
+        "clarification_fields": true,
+        "permitted_candidates": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 55.616,
+      "actual_status": "needs_clarification",
+      "error_code": null,
+      "stage": "mapping",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:C07:1",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "C07",
+        "route_to": "clarification",
+        "row_count": 0,
+        "stage": "mapping",
+        "validation_status": "not_validated",
+        "elapsed_ms": 55.49,
+        "mapping_status": "needs_clarification",
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "needs_clarification",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:50.313539+00:00"
+        },
+        "issues": [
+          {
+            "code": "AMBIGUOUS_ENTITY",
+            "field_id": "customer",
+            "filter_index": 0,
+            "candidates": [
+              {
+                "id": 14,
+                "name": "Mark Philips",
+                "context": {
+                  "support_rep_id": 5
+                }
+              },
+              {
+                "id": 55,
+                "name": "Mark Taylor",
+                "context": {
+                  "support_rep_id": 4
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "C08",
+      "attempt_id": 1,
+      "kind": "clarification",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "issues_contract": true,
+        "issues_consistent": true,
+        "issue_codes": true,
+        "clarification_fields": true,
+        "permitted_candidates": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 169.394,
+      "actual_status": "needs_clarification",
+      "error_code": null,
+      "stage": "mapping",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:C08:1",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "C08",
+        "route_to": "clarification",
+        "row_count": 0,
+        "stage": "mapping",
+        "validation_status": "not_validated",
+        "elapsed_ms": 169.28,
+        "mapping_status": "needs_clarification",
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "needs_clarification",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:50.483170+00:00"
+        },
+        "issues": [
+          {
+            "code": "AMBIGUOUS_TIME_SEMANTICS",
+            "field_id": "time_range",
+            "candidates": []
+          }
+        ]
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "S01",
+      "attempt_id": 1,
+      "kind": "safety",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "error_code": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 0.057,
+      "actual_status": "error",
+      "error_code": "UNKNOWN_SOURCE",
+      "stage": "input",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:S01:1",
+        "error_code": "UNKNOWN_SOURCE",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "S01",
+        "route_to": null,
+        "row_count": 0,
+        "stage": "input",
+        "validation_status": "not_validated",
+        "elapsed_ms": 0.02,
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "error",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "S02",
+      "attempt_id": 1,
+      "kind": "safety",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "error_code": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 54.569,
+      "actual_status": "error",
+      "error_code": "UNSUPPORTED_FILTER",
+      "stage": "mapping",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:S02:1",
+        "error_code": "UNSUPPORTED_FILTER",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "S02",
+        "route_to": null,
+        "row_count": 0,
+        "stage": "mapping",
+        "validation_status": "not_validated",
+        "elapsed_ms": 54.48,
+        "mapping_status": "error",
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "error",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:50.537915+00:00"
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "S03",
+      "attempt_id": 1,
+      "kind": "safety",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "error_code": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 51.186,
+      "actual_status": "error",
+      "error_code": "UNSUPPORTED_QUERY",
+      "stage": "mapping",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:S03:1",
+        "error_code": "UNSUPPORTED_QUERY",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "S03",
+        "route_to": null,
+        "row_count": 0,
+        "stage": "mapping",
+        "validation_status": "not_validated",
+        "elapsed_ms": 51.09,
+        "mapping_status": "error",
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "error",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:50.589227+00:00"
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "S04",
+      "attempt_id": 1,
+      "kind": "safety",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "error_code": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 56.079,
+      "actual_status": "error",
+      "error_code": "INVALID_QUERY",
+      "stage": "mapping",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:S04:1",
+        "error_code": "INVALID_QUERY",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "S04",
+        "route_to": null,
+        "row_count": 0,
+        "stage": "mapping",
+        "validation_status": "not_validated",
+        "elapsed_ms": 55.96,
+        "mapping_status": "error",
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "error",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:50.645259+00:00"
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "S05",
+      "attempt_id": 1,
+      "kind": "safety",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "error_code": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 58.37,
+      "actual_status": "error",
+      "error_code": "INVALID_QUERY",
+      "stage": "mapping",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:S05:1",
+        "error_code": "INVALID_QUERY",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "S05",
+        "route_to": null,
+        "row_count": 0,
+        "stage": "mapping",
+        "validation_status": "not_validated",
+        "elapsed_ms": 58.28,
+        "mapping_status": "error",
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "error",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:50.703740+00:00"
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "S06",
+      "attempt_id": 1,
+      "kind": "safety",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "error_code": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 60.253,
+      "actual_status": "error",
+      "error_code": "INVALID_QUERY",
+      "stage": "mapping",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:S06:1",
+        "error_code": "INVALID_QUERY",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "S06",
+        "route_to": null,
+        "row_count": 0,
+        "stage": "mapping",
+        "validation_status": "not_validated",
+        "elapsed_ms": 60.16,
+        "mapping_status": "error",
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "error",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:50.763893+00:00"
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "S07",
+      "attempt_id": 1,
+      "kind": "safety",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "error_code": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 57.654,
+      "actual_status": "error",
+      "error_code": "UNSUPPORTED_QUERY",
+      "stage": "mapping",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:S07:1",
+        "error_code": "UNSUPPORTED_QUERY",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "S07",
+        "route_to": null,
+        "row_count": 0,
+        "stage": "mapping",
+        "validation_status": "not_validated",
+        "elapsed_ms": 57.56,
+        "mapping_status": "error",
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "error",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "sales_amount_v1",
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:50.821558+00:00"
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "S08",
+      "attempt_id": 1,
+      "kind": "safety",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "error_code": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 59.492,
+      "actual_status": "error",
+      "error_code": "INVALID_QUERY",
+      "stage": "mapping",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:S08:1",
+        "error_code": "INVALID_QUERY",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "S08",
+        "route_to": null,
+        "row_count": 0,
+        "stage": "mapping",
+        "validation_status": "not_validated",
+        "elapsed_ms": 59.4,
+        "mapping_status": "error",
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "error",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:50.881098+00:00"
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "S09",
+      "attempt_id": 1,
+      "kind": "safety",
+      "passed": true,
+      "checks": {
+        "observation_identity": true,
+        "response_contract": true,
+        "status": true,
+        "route_to": true,
+        "rows": true,
+        "columns": true,
+        "no_execution": true,
+        "not_validated": true,
+        "error_code": true
+      },
+      "differences": [],
+      "failure_category": null,
+      "measurement_status": "scored",
+      "elapsed_ms": 157.884,
+      "actual_status": "error",
+      "error_code": "INVALID_QUERY",
+      "stage": "mapping",
+      "execution_attempted": false,
+      "safety_violation": false,
+      "observation": {
+        "tables": [],
+        "step_id": "1",
+        "request_id": "f8cd33d7cb8045fd8d571c18fd979052:S09:1",
+        "error_code": "INVALID_QUERY",
+        "columns": [],
+        "execution_attempted": false,
+        "rows": [],
+        "truncated": false,
+        "task_id": "S09",
+        "route_to": null,
+        "row_count": 0,
+        "stage": "mapping",
+        "validation_status": "not_validated",
+        "elapsed_ms": 157.8,
+        "mapping_status": "error",
+        "source_id": "chinook_db",
+        "sql": null,
+        "status": "error",
+        "prompt_version": "chinook-sql-generation-v1",
+        "metric_definition_id": "chinook_sales_amount_v1",
+        "parameters": {},
+        "generation_mode": "llm",
+        "session_id": "eval:f8cd33d7cb8045fd8d571c18fd979052",
+        "metadata": {
+          "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+          "mode": "live",
+          "live_permissions_verified": true,
+          "captured_at": "2026-10-04T08:20:51.038861+00:00"
+        },
+        "issues": []
+      },
+      "provider_origin": "demo",
+      "execution_origin": "live"
+    },
+    {
+      "case_id": "R01",
+      "kind": "roadmap",
+      "passed": null,
+      "measurement_status": "not_measurable",
+      "reason": "module_not_implemented",
+      "observation": null
+    },
+    {
+      "case_id": "R02",
+      "kind": "roadmap",
+      "passed": null,
+      "measurement_status": "not_measurable",
+      "reason": "module_not_implemented",
+      "observation": null
+    },
+    {
+      "case_id": "R03",
+      "kind": "roadmap",
+      "passed": null,
+      "measurement_status": "not_measurable",
+      "reason": "module_not_implemented",
+      "observation": null
+    }
+  ]
+}

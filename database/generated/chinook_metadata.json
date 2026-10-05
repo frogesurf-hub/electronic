@@ -1,0 +1,763 @@
+{
+  "countries": [
+    {
+      "country": "Argentina"
+    },
+    {
+      "country": "Australia"
+    },
+    {
+      "country": "Austria"
+    },
+    {
+      "country": "Belgium"
+    },
+    {
+      "country": "Brazil"
+    },
+    {
+      "country": "Canada"
+    },
+    {
+      "country": "Chile"
+    },
+    {
+      "country": "Czech Republic"
+    },
+    {
+      "country": "Denmark"
+    },
+    {
+      "country": "Finland"
+    },
+    {
+      "country": "France"
+    },
+    {
+      "country": "Germany"
+    },
+    {
+      "country": "Hungary"
+    },
+    {
+      "country": "India"
+    },
+    {
+      "country": "Ireland"
+    },
+    {
+      "country": "Italy"
+    },
+    {
+      "country": "Netherlands"
+    },
+    {
+      "country": "Norway"
+    },
+    {
+      "country": "Poland"
+    },
+    {
+      "country": "Portugal"
+    },
+    {
+      "country": "Spain"
+    },
+    {
+      "country": "Sweden"
+    },
+    {
+      "country": "United Kingdom"
+    },
+    {
+      "country": "USA"
+    }
+  ],
+  "cities": [
+    {
+      "billing_city": "Buenos Aires",
+      "billing_country": "Argentina"
+    },
+    {
+      "billing_city": "Sidney",
+      "billing_country": "Australia"
+    },
+    {
+      "billing_city": "Vienne",
+      "billing_country": "Austria"
+    },
+    {
+      "billing_city": "Brussels",
+      "billing_country": "Belgium"
+    },
+    {
+      "billing_city": "Brasília",
+      "billing_country": "Brazil"
+    },
+    {
+      "billing_city": "Rio de Janeiro",
+      "billing_country": "Brazil"
+    },
+    {
+      "billing_city": "São José dos Campos",
+      "billing_country": "Brazil"
+    },
+    {
+      "billing_city": "São Paulo",
+      "billing_country": "Brazil"
+    },
+    {
+      "billing_city": "Edmonton",
+      "billing_country": "Canada"
+    },
+    {
+      "billing_city": "Halifax",
+      "billing_country": "Canada"
+    },
+    {
+      "billing_city": "Montréal",
+      "billing_country": "Canada"
+    },
+    {
+      "billing_city": "Ottawa",
+      "billing_country": "Canada"
+    },
+    {
+      "billing_city": "Toronto",
+      "billing_country": "Canada"
+    },
+    {
+      "billing_city": "Vancouver",
+      "billing_country": "Canada"
+    },
+    {
+      "billing_city": "Winnipeg",
+      "billing_country": "Canada"
+    },
+    {
+      "billing_city": "Yellowknife",
+      "billing_country": "Canada"
+    },
+    {
+      "billing_city": "Santiago",
+      "billing_country": "Chile"
+    },
+    {
+      "billing_city": "Prague",
+      "billing_country": "Czech Republic"
+    },
+    {
+      "billing_city": "Copenhagen",
+      "billing_country": "Denmark"
+    },
+    {
+      "billing_city": "Helsinki",
+      "billing_country": "Finland"
+    },
+    {
+      "billing_city": "Bordeaux",
+      "billing_country": "France"
+    },
+    {
+      "billing_city": "Dijon",
+      "billing_country": "France"
+    },
+    {
+      "billing_city": "Lyon",
+      "billing_country": "France"
+    },
+    {
+      "billing_city": "Paris",
+      "billing_country": "France"
+    },
+    {
+      "billing_city": "Berlin",
+      "billing_country": "Germany"
+    },
+    {
+      "billing_city": "Frankfurt",
+      "billing_country": "Germany"
+    },
+    {
+      "billing_city": "Stuttgart",
+      "billing_country": "Germany"
+    },
+    {
+      "billing_city": "Budapest",
+      "billing_country": "Hungary"
+    },
+    {
+      "billing_city": "Bangalore",
+      "billing_country": "India"
+    },
+    {
+      "billing_city": "Delhi",
+      "billing_country": "India"
+    },
+    {
+      "billing_city": "Dublin",
+      "billing_country": "Ireland"
+    },
+    {
+      "billing_city": "Rome",
+      "billing_country": "Italy"
+    },
+    {
+      "billing_city": "Amsterdam",
+      "billing_country": "Netherlands"
+    },
+    {
+      "billing_city": "Oslo",
+      "billing_country": "Norway"
+    },
+    {
+      "billing_city": "Warsaw",
+      "billing_country": "Poland"
+    },
+    {
+      "billing_city": "Lisbon",
+      "billing_country": "Portugal"
+    },
+    {
+      "billing_city": "Porto",
+      "billing_country": "Portugal"
+    },
+    {
+      "billing_city": "Madrid",
+      "billing_country": "Spain"
+    },
+    {
+      "billing_city": "Stockholm",
+      "billing_country": "Sweden"
+    },
+    {
+      "billing_city": "Edinburgh",
+      "billing_country": "United Kingdom"
+    },
+    {
+      "billing_city": "London",
+      "billing_country": "United Kingdom"
+    },
+    {
+      "billing_city": "Boston",
+      "billing_country": "USA"
+    },
+    {
+      "billing_city": "Chicago",
+      "billing_country": "USA"
+    },
+    {
+      "billing_city": "Cupertino",
+      "billing_country": "USA"
+    },
+    {
+      "billing_city": "Fort Worth",
+      "billing_country": "USA"
+    },
+    {
+      "billing_city": "Madison",
+      "billing_country": "USA"
+    },
+    {
+      "billing_city": "Mountain View",
+      "billing_country": "USA"
+    },
+    {
+      "billing_city": "New York",
+      "billing_country": "USA"
+    },
+    {
+      "billing_city": "Orlando",
+      "billing_country": "USA"
+    },
+    {
+      "billing_city": "Redmond",
+      "billing_country": "USA"
+    },
+    {
+      "billing_city": "Reno",
+      "billing_country": "USA"
+    },
+    {
+      "billing_city": "Salt Lake City",
+      "billing_country": "USA"
+    },
+    {
+      "billing_city": "Tucson",
+      "billing_country": "USA"
+    }
+  ],
+  "customers": [
+    {
+      "customer_id": 1,
+      "first_name": "Luís",
+      "last_name": "Gonçalves",
+      "support_rep_id": 3,
+      "full_name": "Luís Gonçalves"
+    },
+    {
+      "customer_id": 2,
+      "first_name": "Leonie",
+      "last_name": "Köhler",
+      "support_rep_id": 5,
+      "full_name": "Leonie Köhler"
+    },
+    {
+      "customer_id": 3,
+      "first_name": "François",
+      "last_name": "Tremblay",
+      "support_rep_id": 3,
+      "full_name": "François Tremblay"
+    },
+    {
+      "customer_id": 4,
+      "first_name": "Bjørn",
+      "last_name": "Hansen",
+      "support_rep_id": 4,
+      "full_name": "Bjørn Hansen"
+    },
+    {
+      "customer_id": 5,
+      "first_name": "František",
+      "last_name": "Wichterlová",
+      "support_rep_id": 4,
+      "full_name": "František Wichterlová"
+    },
+    {
+      "customer_id": 6,
+      "first_name": "Helena",
+      "last_name": "Holý",
+      "support_rep_id": 5,
+      "full_name": "Helena Holý"
+    },
+    {
+      "customer_id": 7,
+      "first_name": "Astrid",
+      "last_name": "Gruber",
+      "support_rep_id": 5,
+      "full_name": "Astrid Gruber"
+    },
+    {
+      "customer_id": 8,
+      "first_name": "Daan",
+      "last_name": "Peeters",
+      "support_rep_id": 4,
+      "full_name": "Daan Peeters"
+    },
+    {
+      "customer_id": 9,
+      "first_name": "Kara",
+      "last_name": "Nielsen",
+      "support_rep_id": 4,
+      "full_name": "Kara Nielsen"
+    },
+    {
+      "customer_id": 10,
+      "first_name": "Eduardo",
+      "last_name": "Martins",
+      "support_rep_id": 4,
+      "full_name": "Eduardo Martins"
+    },
+    {
+      "customer_id": 11,
+      "first_name": "Alexandre",
+      "last_name": "Rocha",
+      "support_rep_id": 5,
+      "full_name": "Alexandre Rocha"
+    },
+    {
+      "customer_id": 12,
+      "first_name": "Roberto",
+      "last_name": "Almeida",
+      "support_rep_id": 3,
+      "full_name": "Roberto Almeida"
+    },
+    {
+      "customer_id": 13,
+      "first_name": "Fernanda",
+      "last_name": "Ramos",
+      "support_rep_id": 4,
+      "full_name": "Fernanda Ramos"
+    },
+    {
+      "customer_id": 14,
+      "first_name": "Mark",
+      "last_name": "Philips",
+      "support_rep_id": 5,
+      "full_name": "Mark Philips"
+    },
+    {
+      "customer_id": 15,
+      "first_name": "Jennifer",
+      "last_name": "Peterson",
+      "support_rep_id": 3,
+      "full_name": "Jennifer Peterson"
+    },
+    {
+      "customer_id": 16,
+      "first_name": "Frank",
+      "last_name": "Harris",
+      "support_rep_id": 4,
+      "full_name": "Frank Harris"
+    },
+    {
+      "customer_id": 17,
+      "first_name": "Jack",
+      "last_name": "Smith",
+      "support_rep_id": 5,
+      "full_name": "Jack Smith"
+    },
+    {
+      "customer_id": 18,
+      "first_name": "Michelle",
+      "last_name": "Brooks",
+      "support_rep_id": 3,
+      "full_name": "Michelle Brooks"
+    },
+    {
+      "customer_id": 19,
+      "first_name": "Tim",
+      "last_name": "Goyer",
+      "support_rep_id": 3,
+      "full_name": "Tim Goyer"
+    },
+    {
+      "customer_id": 20,
+      "first_name": "Dan",
+      "last_name": "Miller",
+      "support_rep_id": 4,
+      "full_name": "Dan Miller"
+    },
+    {
+      "customer_id": 21,
+      "first_name": "Kathy",
+      "last_name": "Chase",
+      "support_rep_id": 5,
+      "full_name": "Kathy Chase"
+    },
+    {
+      "customer_id": 22,
+      "first_name": "Heather",
+      "last_name": "Leacock",
+      "support_rep_id": 4,
+      "full_name": "Heather Leacock"
+    },
+    {
+      "customer_id": 23,
+      "first_name": "John",
+      "last_name": "Gordon",
+      "support_rep_id": 4,
+      "full_name": "John Gordon"
+    },
+    {
+      "customer_id": 24,
+      "first_name": "Frank",
+      "last_name": "Ralston",
+      "support_rep_id": 3,
+      "full_name": "Frank Ralston"
+    },
+    {
+      "customer_id": 25,
+      "first_name": "Victor",
+      "last_name": "Stevens",
+      "support_rep_id": 5,
+      "full_name": "Victor Stevens"
+    },
+    {
+      "customer_id": 26,
+      "first_name": "Richard",
+      "last_name": "Cunningham",
+      "support_rep_id": 4,
+      "full_name": "Richard Cunningham"
+    },
+    {
+      "customer_id": 27,
+      "first_name": "Patrick",
+      "last_name": "Gray",
+      "support_rep_id": 4,
+      "full_name": "Patrick Gray"
+    },
+    {
+      "customer_id": 28,
+      "first_name": "Julia",
+      "last_name": "Barnett",
+      "support_rep_id": 5,
+      "full_name": "Julia Barnett"
+    },
+    {
+      "customer_id": 29,
+      "first_name": "Robert",
+      "last_name": "Brown",
+      "support_rep_id": 3,
+      "full_name": "Robert Brown"
+    },
+    {
+      "customer_id": 30,
+      "first_name": "Edward",
+      "last_name": "Francis",
+      "support_rep_id": 3,
+      "full_name": "Edward Francis"
+    },
+    {
+      "customer_id": 31,
+      "first_name": "Martha",
+      "last_name": "Silk",
+      "support_rep_id": 5,
+      "full_name": "Martha Silk"
+    },
+    {
+      "customer_id": 32,
+      "first_name": "Aaron",
+      "last_name": "Mitchell",
+      "support_rep_id": 4,
+      "full_name": "Aaron Mitchell"
+    },
+    {
+      "customer_id": 33,
+      "first_name": "Ellie",
+      "last_name": "Sullivan",
+      "support_rep_id": 3,
+      "full_name": "Ellie Sullivan"
+    },
+    {
+      "customer_id": 34,
+      "first_name": "João",
+      "last_name": "Fernandes",
+      "support_rep_id": 4,
+      "full_name": "João Fernandes"
+    },
+    {
+      "customer_id": 35,
+      "first_name": "Madalena",
+      "last_name": "Sampaio",
+      "support_rep_id": 4,
+      "full_name": "Madalena Sampaio"
+    },
+    {
+      "customer_id": 36,
+      "first_name": "Hannah",
+      "last_name": "Schneider",
+      "support_rep_id": 5,
+      "full_name": "Hannah Schneider"
+    },
+    {
+      "customer_id": 37,
+      "first_name": "Fynn",
+      "last_name": "Zimmermann",
+      "support_rep_id": 3,
+      "full_name": "Fynn Zimmermann"
+    },
+    {
+      "customer_id": 38,
+      "first_name": "Niklas",
+      "last_name": "Schröder",
+      "support_rep_id": 3,
+      "full_name": "Niklas Schröder"
+    },
+    {
+      "customer_id": 39,
+      "first_name": "Camille",
+      "last_name": "Bernard",
+      "support_rep_id": 4,
+      "full_name": "Camille Bernard"
+    },
+    {
+      "customer_id": 40,
+      "first_name": "Dominique",
+      "last_name": "Lefebvre",
+      "support_rep_id": 4,
+      "full_name": "Dominique Lefebvre"
+    },
+    {
+      "customer_id": 41,
+      "first_name": "Marc",
+      "last_name": "Dubois",
+      "support_rep_id": 5,
+      "full_name": "Marc Dubois"
+    },
+    {
+      "customer_id": 42,
+      "first_name": "Wyatt",
+      "last_name": "Girard",
+      "support_rep_id": 3,
+      "full_name": "Wyatt Girard"
+    },
+    {
+      "customer_id": 43,
+      "first_name": "Isabelle",
+      "last_name": "Mercier",
+      "support_rep_id": 3,
+      "full_name": "Isabelle Mercier"
+    },
+    {
+      "customer_id": 44,
+      "first_name": "Terhi",
+      "last_name": "Hämäläinen",
+      "support_rep_id": 3,
+      "full_name": "Terhi Hämäläinen"
+    },
+    {
+      "customer_id": 45,
+      "first_name": "Ladislav",
+      "last_name": "Kovács",
+      "support_rep_id": 3,
+      "full_name": "Ladislav Kovács"
+    },
+    {
+      "customer_id": 46,
+      "first_name": "Hugh",
+      "last_name": "O'Reilly",
+      "support_rep_id": 3,
+      "full_name": "Hugh O'Reilly"
+    },
+    {
+      "customer_id": 47,
+      "first_name": "Lucas",
+      "last_name": "Mancini",
+      "support_rep_id": 5,
+      "full_name": "Lucas Mancini"
+    },
+    {
+      "customer_id": 48,
+      "first_name": "Johannes",
+      "last_name": "Van der Berg",
+      "support_rep_id": 5,
+      "full_name": "Johannes Van der Berg"
+    },
+    {
+      "customer_id": 49,
+      "first_name": "Stanisław",
+      "last_name": "Wójcik",
+      "support_rep_id": 4,
+      "full_name": "Stanisław Wójcik"
+    },
+    {
+      "customer_id": 50,
+      "first_name": "Enrique",
+      "last_name": "Muñoz",
+      "support_rep_id": 5,
+      "full_name": "Enrique Muñoz"
+    },
+    {
+      "customer_id": 51,
+      "first_name": "Joakim",
+      "last_name": "Johansson",
+      "support_rep_id": 5,
+      "full_name": "Joakim Johansson"
+    },
+    {
+      "customer_id": 52,
+      "first_name": "Emma",
+      "last_name": "Jones",
+      "support_rep_id": 3,
+      "full_name": "Emma Jones"
+    },
+    {
+      "customer_id": 53,
+      "first_name": "Phil",
+      "last_name": "Hughes",
+      "support_rep_id": 3,
+      "full_name": "Phil Hughes"
+    },
+    {
+      "customer_id": 54,
+      "first_name": "Steve",
+      "last_name": "Murray",
+      "support_rep_id": 5,
+      "full_name": "Steve Murray"
+    },
+    {
+      "customer_id": 55,
+      "first_name": "Mark",
+      "last_name": "Taylor",
+      "support_rep_id": 4,
+      "full_name": "Mark Taylor"
+    },
+    {
+      "customer_id": 56,
+      "first_name": "Diego",
+      "last_name": "Gutiérrez",
+      "support_rep_id": 4,
+      "full_name": "Diego Gutiérrez"
+    },
+    {
+      "customer_id": 57,
+      "first_name": "Luis",
+      "last_name": "Rojas",
+      "support_rep_id": 5,
+      "full_name": "Luis Rojas"
+    },
+    {
+      "customer_id": 58,
+      "first_name": "Manoj",
+      "last_name": "Pareek",
+      "support_rep_id": 3,
+      "full_name": "Manoj Pareek"
+    },
+    {
+      "customer_id": 59,
+      "first_name": "Puja",
+      "last_name": "Srivastava",
+      "support_rep_id": 3,
+      "full_name": "Puja Srivastava"
+    }
+  ],
+  "employees": [
+    {
+      "employee_id": 1,
+      "first_name": "Andrew",
+      "last_name": "Adams",
+      "title": "General Manager",
+      "full_name": "Andrew Adams"
+    },
+    {
+      "employee_id": 2,
+      "first_name": "Nancy",
+      "last_name": "Edwards",
+      "title": "Sales Manager",
+      "full_name": "Nancy Edwards"
+    },
+    {
+      "employee_id": 3,
+      "first_name": "Jane",
+      "last_name": "Peacock",
+      "title": "Sales Support Agent",
+      "full_name": "Jane Peacock"
+    },
+    {
+      "employee_id": 4,
+      "first_name": "Margaret",
+      "last_name": "Park",
+      "title": "Sales Support Agent",
+      "full_name": "Margaret Park"
+    },
+    {
+      "employee_id": 5,
+      "first_name": "Steve",
+      "last_name": "Johnson",
+      "title": "Sales Support Agent",
+      "full_name": "Steve Johnson"
+    },
+    {
+      "employee_id": 6,
+      "first_name": "Michael",
+      "last_name": "Mitchell",
+      "title": "IT Manager",
+      "full_name": "Michael Mitchell"
+    },
+    {
+      "employee_id": 7,
+      "first_name": "Robert",
+      "last_name": "King",
+      "title": "IT Staff",
+      "full_name": "Robert King"
+    },
+    {
+      "employee_id": 8,
+      "first_name": "Laura",
+      "last_name": "Callahan",
+      "title": "IT Staff",
+      "full_name": "Laura Callahan"
+    }
+  ]
+}

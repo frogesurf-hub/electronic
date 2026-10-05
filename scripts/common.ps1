@@ -21,6 +21,18 @@ function Assert-ProjectEnvironment {
     }
 }
 
+function Assert-ProjectDotnet {
+    try {
+        $SdkVersion = & $ProjectDotnet --version 2>$null
+        $SdkStatus = $LASTEXITCODE
+    } catch {
+        $SdkStatus = 1
+    }
+    if ($SdkStatus -ne 0 -or $SdkVersion -notmatch '^8\.0\.') {
+        throw 'The .NET 8 SDK is not ready. Run setup.ps1 or install the verified offline SDK before building the desktop.'
+    }
+}
+
 function Assert-LastCommand {
     param([string]$Action)
     if ($LASTEXITCODE -ne 0) {

@@ -1,0 +1,404 @@
+{
+  "status": "complete",
+  "source_id": "chinook_db",
+  "provider_origin": "demo",
+  "execution_origin": "live",
+  "real_model_quality_verified": false,
+  "source_sql_sha256": "e3fde5c1a5b51a2a91429a702c9ca6e69ba56e6c7f5e112724d70c3d03db695e",
+  "reference_sha256": "df63721f72f482c5d66454900b4a1ee2be29df3a638c93f445193fa218885908",
+  "snapshot_before_sha256": "df63721f72f482c5d66454900b4a1ee2be29df3a638c93f445193fa218885908",
+  "snapshot_after_sha256": "df63721f72f482c5d66454900b4a1ee2be29df3a638c93f445193fa218885908",
+  "code_version": "1191734997a351e0abb09206c6e81737b8b91ac8fc686e3d261a41da7ca2b952",
+  "tables": [
+    {
+      "table": "public.album",
+      "columns": 3,
+      "rows": 347,
+      "expected_rows": 347,
+      "pages": 1,
+      "complete": true
+    },
+    {
+      "table": "public.artist",
+      "columns": 2,
+      "rows": 275,
+      "expected_rows": 275,
+      "pages": 1,
+      "complete": true
+    },
+    {
+      "table": "public.customer",
+      "columns": 13,
+      "rows": 59,
+      "expected_rows": 59,
+      "pages": 1,
+      "complete": true
+    },
+    {
+      "table": "public.employee",
+      "columns": 15,
+      "rows": 8,
+      "expected_rows": 8,
+      "pages": 1,
+      "complete": true
+    },
+    {
+      "table": "public.genre",
+      "columns": 2,
+      "rows": 25,
+      "expected_rows": 25,
+      "pages": 1,
+      "complete": true
+    },
+    {
+      "table": "public.invoice",
+      "columns": 9,
+      "rows": 412,
+      "expected_rows": 412,
+      "pages": 1,
+      "complete": true
+    },
+    {
+      "table": "public.invoice_line",
+      "columns": 5,
+      "rows": 2240,
+      "expected_rows": 2240,
+      "pages": 3,
+      "complete": true
+    },
+    {
+      "table": "public.media_type",
+      "columns": 2,
+      "rows": 5,
+      "expected_rows": 5,
+      "pages": 1,
+      "complete": true
+    },
+    {
+      "table": "public.playlist",
+      "columns": 2,
+      "rows": 18,
+      "expected_rows": 18,
+      "pages": 1,
+      "complete": true
+    },
+    {
+      "table": "public.playlist_track",
+      "columns": 2,
+      "rows": 8715,
+      "expected_rows": 8715,
+      "pages": 9,
+      "complete": true
+    },
+    {
+      "table": "public.track",
+      "columns": 9,
+      "rows": 3503,
+      "expected_rows": 3503,
+      "pages": 4,
+      "complete": true
+    }
+  ],
+  "total_rows": 15607,
+  "total_columns": 64,
+  "checks": [
+    {
+      "case": "album@0",
+      "table": "public.album",
+      "passed": true,
+      "row_count": 347,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "artist@0",
+      "table": "public.artist",
+      "passed": true,
+      "row_count": 275,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "customer@0",
+      "table": "public.customer",
+      "passed": true,
+      "row_count": 59,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "employee@0",
+      "table": "public.employee",
+      "passed": true,
+      "row_count": 8,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "genre@0",
+      "table": "public.genre",
+      "passed": true,
+      "row_count": 25,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "invoice@0",
+      "table": "public.invoice",
+      "passed": true,
+      "row_count": 412,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "invoice_line@0",
+      "table": "public.invoice_line",
+      "passed": true,
+      "row_count": 1000,
+      "has_more": true,
+      "next_offset": 1000,
+      "execution_attempted": true
+    },
+    {
+      "case": "invoice_line@1000",
+      "table": "public.invoice_line",
+      "passed": true,
+      "row_count": 1000,
+      "has_more": true,
+      "next_offset": 2000,
+      "execution_attempted": true
+    },
+    {
+      "case": "invoice_line@2000",
+      "table": "public.invoice_line",
+      "passed": true,
+      "row_count": 240,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "media_type@0",
+      "table": "public.media_type",
+      "passed": true,
+      "row_count": 5,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "playlist@0",
+      "table": "public.playlist",
+      "passed": true,
+      "row_count": 18,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "playlist_track@0",
+      "table": "public.playlist_track",
+      "passed": true,
+      "row_count": 1000,
+      "has_more": true,
+      "next_offset": 1000,
+      "execution_attempted": true
+    },
+    {
+      "case": "playlist_track@1000",
+      "table": "public.playlist_track",
+      "passed": true,
+      "row_count": 1000,
+      "has_more": true,
+      "next_offset": 2000,
+      "execution_attempted": true
+    },
+    {
+      "case": "playlist_track@2000",
+      "table": "public.playlist_track",
+      "passed": true,
+      "row_count": 1000,
+      "has_more": true,
+      "next_offset": 3000,
+      "execution_attempted": true
+    },
+    {
+      "case": "playlist_track@3000",
+      "table": "public.playlist_track",
+      "passed": true,
+      "row_count": 1000,
+      "has_more": true,
+      "next_offset": 4000,
+      "execution_attempted": true
+    },
+    {
+      "case": "playlist_track@4000",
+      "table": "public.playlist_track",
+      "passed": true,
+      "row_count": 1000,
+      "has_more": true,
+      "next_offset": 5000,
+      "execution_attempted": true
+    },
+    {
+      "case": "playlist_track@5000",
+      "table": "public.playlist_track",
+      "passed": true,
+      "row_count": 1000,
+      "has_more": true,
+      "next_offset": 6000,
+      "execution_attempted": true
+    },
+    {
+      "case": "playlist_track@6000",
+      "table": "public.playlist_track",
+      "passed": true,
+      "row_count": 1000,
+      "has_more": true,
+      "next_offset": 7000,
+      "execution_attempted": true
+    },
+    {
+      "case": "playlist_track@7000",
+      "table": "public.playlist_track",
+      "passed": true,
+      "row_count": 1000,
+      "has_more": true,
+      "next_offset": 8000,
+      "execution_attempted": true
+    },
+    {
+      "case": "playlist_track@8000",
+      "table": "public.playlist_track",
+      "passed": true,
+      "row_count": 715,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "track@0",
+      "table": "public.track",
+      "passed": true,
+      "row_count": 1000,
+      "has_more": true,
+      "next_offset": 1000,
+      "execution_attempted": true
+    },
+    {
+      "case": "track@1000",
+      "table": "public.track",
+      "passed": true,
+      "row_count": 1000,
+      "has_more": true,
+      "next_offset": 2000,
+      "execution_attempted": true
+    },
+    {
+      "case": "track@2000",
+      "table": "public.track",
+      "passed": true,
+      "row_count": 1000,
+      "has_more": true,
+      "next_offset": 3000,
+      "execution_attempted": true
+    },
+    {
+      "case": "track@3000",
+      "table": "public.track",
+      "passed": true,
+      "row_count": 503,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "typed-filter-sort-page-1",
+      "table": "public.track",
+      "passed": true,
+      "row_count": 11,
+      "has_more": true,
+      "next_offset": 13,
+      "execution_attempted": true
+    },
+    {
+      "case": "typed-filter-sort-page-2",
+      "table": "public.employee",
+      "passed": true,
+      "row_count": 1,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "typed-filter-sort-page-3",
+      "table": "public.employee",
+      "passed": true,
+      "row_count": 8,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "typed-filter-sort-page-4",
+      "table": "public.invoice",
+      "passed": true,
+      "row_count": 17,
+      "has_more": true,
+      "next_offset": 20,
+      "execution_attempted": true
+    },
+    {
+      "case": "typed-filter-sort-page-5",
+      "table": "public.track",
+      "passed": true,
+      "row_count": 0,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "typed-filter-sort-page-6",
+      "table": "public.track",
+      "passed": true,
+      "row_count": 27,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "typed-filter-sort-page-7",
+      "table": "public.customer",
+      "passed": true,
+      "row_count": 3,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "typed-filter-sort-page-8",
+      "table": "public.genre",
+      "passed": true,
+      "row_count": 0,
+      "has_more": false,
+      "next_offset": null,
+      "execution_attempted": true
+    },
+    {
+      "case": "typed-filter-sort-page-9",
+      "table": "public.playlist_track",
+      "passed": true,
+      "row_count": 23,
+      "has_more": true,
+      "next_offset": 38,
+      "execution_attempted": true
+    }
+  ],
+  "failures": []
+}

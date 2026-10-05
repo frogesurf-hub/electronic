@@ -1,0 +1,1094 @@
+{
+  "project_ref": null,
+  "read_date": "2026-10-04",
+  "captured_at": "2026-10-04T07:29:58.160472+00:00",
+  "reader_role": "chinook_reader",
+  "summary": {
+    "tables": 11,
+    "table_columns": 64,
+    "views": 0,
+    "view_columns": 0,
+    "foreign_keys": 11,
+    "primary_keys": 11,
+    "unique_constraints": 0
+  },
+  "objects": [
+    {
+      "schema_name": "public",
+      "table_name": "album",
+      "object_type": "table",
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "artist",
+      "object_type": "table",
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "customer",
+      "object_type": "table",
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "object_type": "table",
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "genre",
+      "object_type": "table",
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice",
+      "object_type": "table",
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice_line",
+      "object_type": "table",
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "media_type",
+      "object_type": "table",
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "playlist",
+      "object_type": "table",
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "playlist_track",
+      "object_type": "table",
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "track",
+      "object_type": "table",
+      "description": null
+    }
+  ],
+  "columns": [
+    {
+      "schema_name": "public",
+      "table_name": "album",
+      "ordinal_position": 1,
+      "column_name": "album_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "album",
+      "ordinal_position": 2,
+      "column_name": "title",
+      "data_type": "character varying(160)",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "album",
+      "ordinal_position": 3,
+      "column_name": "artist_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "artist",
+      "ordinal_position": 1,
+      "column_name": "artist_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "artist",
+      "ordinal_position": 2,
+      "column_name": "name",
+      "data_type": "character varying(120)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "customer",
+      "ordinal_position": 1,
+      "column_name": "customer_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "customer",
+      "ordinal_position": 2,
+      "column_name": "first_name",
+      "data_type": "character varying(40)",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "customer",
+      "ordinal_position": 3,
+      "column_name": "last_name",
+      "data_type": "character varying(20)",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "customer",
+      "ordinal_position": 4,
+      "column_name": "company",
+      "data_type": "character varying(80)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "customer",
+      "ordinal_position": 5,
+      "column_name": "address",
+      "data_type": "character varying(70)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "customer",
+      "ordinal_position": 6,
+      "column_name": "city",
+      "data_type": "character varying(40)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "customer",
+      "ordinal_position": 7,
+      "column_name": "state",
+      "data_type": "character varying(40)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "customer",
+      "ordinal_position": 8,
+      "column_name": "country",
+      "data_type": "character varying(40)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "customer",
+      "ordinal_position": 9,
+      "column_name": "postal_code",
+      "data_type": "character varying(10)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "customer",
+      "ordinal_position": 10,
+      "column_name": "phone",
+      "data_type": "character varying(24)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "customer",
+      "ordinal_position": 11,
+      "column_name": "fax",
+      "data_type": "character varying(24)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "customer",
+      "ordinal_position": 12,
+      "column_name": "email",
+      "data_type": "character varying(60)",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "customer",
+      "ordinal_position": 13,
+      "column_name": "support_rep_id",
+      "data_type": "integer",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "ordinal_position": 1,
+      "column_name": "employee_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "ordinal_position": 2,
+      "column_name": "last_name",
+      "data_type": "character varying(20)",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "ordinal_position": 3,
+      "column_name": "first_name",
+      "data_type": "character varying(20)",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "ordinal_position": 4,
+      "column_name": "title",
+      "data_type": "character varying(30)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "ordinal_position": 5,
+      "column_name": "reports_to",
+      "data_type": "integer",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "ordinal_position": 6,
+      "column_name": "birth_date",
+      "data_type": "timestamp without time zone",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "ordinal_position": 7,
+      "column_name": "hire_date",
+      "data_type": "timestamp without time zone",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "ordinal_position": 8,
+      "column_name": "address",
+      "data_type": "character varying(70)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "ordinal_position": 9,
+      "column_name": "city",
+      "data_type": "character varying(40)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "ordinal_position": 10,
+      "column_name": "state",
+      "data_type": "character varying(40)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "ordinal_position": 11,
+      "column_name": "country",
+      "data_type": "character varying(40)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "ordinal_position": 12,
+      "column_name": "postal_code",
+      "data_type": "character varying(10)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "ordinal_position": 13,
+      "column_name": "phone",
+      "data_type": "character varying(24)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "ordinal_position": 14,
+      "column_name": "fax",
+      "data_type": "character varying(24)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "ordinal_position": 15,
+      "column_name": "email",
+      "data_type": "character varying(60)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "genre",
+      "ordinal_position": 1,
+      "column_name": "genre_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "genre",
+      "ordinal_position": 2,
+      "column_name": "name",
+      "data_type": "character varying(120)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice",
+      "ordinal_position": 1,
+      "column_name": "invoice_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice",
+      "ordinal_position": 2,
+      "column_name": "customer_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice",
+      "ordinal_position": 3,
+      "column_name": "invoice_date",
+      "data_type": "timestamp without time zone",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice",
+      "ordinal_position": 4,
+      "column_name": "billing_address",
+      "data_type": "character varying(70)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice",
+      "ordinal_position": 5,
+      "column_name": "billing_city",
+      "data_type": "character varying(40)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice",
+      "ordinal_position": 6,
+      "column_name": "billing_state",
+      "data_type": "character varying(40)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice",
+      "ordinal_position": 7,
+      "column_name": "billing_country",
+      "data_type": "character varying(40)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice",
+      "ordinal_position": 8,
+      "column_name": "billing_postal_code",
+      "data_type": "character varying(10)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice",
+      "ordinal_position": 9,
+      "column_name": "total",
+      "data_type": "numeric(10,2)",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice_line",
+      "ordinal_position": 1,
+      "column_name": "invoice_line_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice_line",
+      "ordinal_position": 2,
+      "column_name": "invoice_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice_line",
+      "ordinal_position": 3,
+      "column_name": "track_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice_line",
+      "ordinal_position": 4,
+      "column_name": "unit_price",
+      "data_type": "numeric(10,2)",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice_line",
+      "ordinal_position": 5,
+      "column_name": "quantity",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "media_type",
+      "ordinal_position": 1,
+      "column_name": "media_type_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "media_type",
+      "ordinal_position": 2,
+      "column_name": "name",
+      "data_type": "character varying(120)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "playlist",
+      "ordinal_position": 1,
+      "column_name": "playlist_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "playlist",
+      "ordinal_position": 2,
+      "column_name": "name",
+      "data_type": "character varying(120)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "playlist_track",
+      "ordinal_position": 1,
+      "column_name": "playlist_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "playlist_track",
+      "ordinal_position": 2,
+      "column_name": "track_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "track",
+      "ordinal_position": 1,
+      "column_name": "track_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "track",
+      "ordinal_position": 2,
+      "column_name": "name",
+      "data_type": "character varying(200)",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "track",
+      "ordinal_position": 3,
+      "column_name": "album_id",
+      "data_type": "integer",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "track",
+      "ordinal_position": 4,
+      "column_name": "media_type_id",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "track",
+      "ordinal_position": 5,
+      "column_name": "genre_id",
+      "data_type": "integer",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "track",
+      "ordinal_position": 6,
+      "column_name": "composer",
+      "data_type": "character varying(220)",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "track",
+      "ordinal_position": 7,
+      "column_name": "milliseconds",
+      "data_type": "integer",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "track",
+      "ordinal_position": 8,
+      "column_name": "bytes",
+      "data_type": "integer",
+      "is_nullable": true,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    },
+    {
+      "schema_name": "public",
+      "table_name": "track",
+      "ordinal_position": 9,
+      "column_name": "unit_price",
+      "data_type": "numeric(10,2)",
+      "is_nullable": false,
+      "is_generated": false,
+      "default_or_generation_expression": null,
+      "description": null
+    }
+  ],
+  "keys": [
+    {
+      "schema_name": "public",
+      "table_name": "album",
+      "constraint_name": "album_pkey",
+      "constraint_type": "primary_key",
+      "definition": "PRIMARY KEY (album_id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "artist",
+      "constraint_name": "artist_pkey",
+      "constraint_type": "primary_key",
+      "definition": "PRIMARY KEY (artist_id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "customer",
+      "constraint_name": "customer_pkey",
+      "constraint_type": "primary_key",
+      "definition": "PRIMARY KEY (customer_id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "employee",
+      "constraint_name": "employee_pkey",
+      "constraint_type": "primary_key",
+      "definition": "PRIMARY KEY (employee_id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "genre",
+      "constraint_name": "genre_pkey",
+      "constraint_type": "primary_key",
+      "definition": "PRIMARY KEY (genre_id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice",
+      "constraint_name": "invoice_pkey",
+      "constraint_type": "primary_key",
+      "definition": "PRIMARY KEY (invoice_id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "invoice_line",
+      "constraint_name": "invoice_line_pkey",
+      "constraint_type": "primary_key",
+      "definition": "PRIMARY KEY (invoice_line_id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "media_type",
+      "constraint_name": "media_type_pkey",
+      "constraint_type": "primary_key",
+      "definition": "PRIMARY KEY (media_type_id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "playlist",
+      "constraint_name": "playlist_pkey",
+      "constraint_type": "primary_key",
+      "definition": "PRIMARY KEY (playlist_id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "playlist_track",
+      "constraint_name": "playlist_track_pkey",
+      "constraint_type": "primary_key",
+      "definition": "PRIMARY KEY (playlist_id, track_id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "track",
+      "constraint_name": "track_pkey",
+      "constraint_type": "primary_key",
+      "definition": "PRIMARY KEY (track_id)"
+    }
+  ],
+  "foreign_keys": [
+    {
+      "constraint_name": "album_artist_id_fkey",
+      "source_schema": "public",
+      "source_table": "album",
+      "source_column": "artist_id",
+      "target_schema": "public",
+      "target_table": "artist",
+      "target_column": "artist_id",
+      "column_position": 1,
+      "definition": "FOREIGN KEY (artist_id) REFERENCES public.artist(artist_id)"
+    },
+    {
+      "constraint_name": "customer_support_rep_id_fkey",
+      "source_schema": "public",
+      "source_table": "customer",
+      "source_column": "support_rep_id",
+      "target_schema": "public",
+      "target_table": "employee",
+      "target_column": "employee_id",
+      "column_position": 1,
+      "definition": "FOREIGN KEY (support_rep_id) REFERENCES public.employee(employee_id)"
+    },
+    {
+      "constraint_name": "employee_reports_to_fkey",
+      "source_schema": "public",
+      "source_table": "employee",
+      "source_column": "reports_to",
+      "target_schema": "public",
+      "target_table": "employee",
+      "target_column": "employee_id",
+      "column_position": 1,
+      "definition": "FOREIGN KEY (reports_to) REFERENCES public.employee(employee_id)"
+    },
+    {
+      "constraint_name": "invoice_customer_id_fkey",
+      "source_schema": "public",
+      "source_table": "invoice",
+      "source_column": "customer_id",
+      "target_schema": "public",
+      "target_table": "customer",
+      "target_column": "customer_id",
+      "column_position": 1,
+      "definition": "FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id)"
+    },
+    {
+      "constraint_name": "invoice_line_invoice_id_fkey",
+      "source_schema": "public",
+      "source_table": "invoice_line",
+      "source_column": "invoice_id",
+      "target_schema": "public",
+      "target_table": "invoice",
+      "target_column": "invoice_id",
+      "column_position": 1,
+      "definition": "FOREIGN KEY (invoice_id) REFERENCES public.invoice(invoice_id)"
+    },
+    {
+      "constraint_name": "invoice_line_track_id_fkey",
+      "source_schema": "public",
+      "source_table": "invoice_line",
+      "source_column": "track_id",
+      "target_schema": "public",
+      "target_table": "track",
+      "target_column": "track_id",
+      "column_position": 1,
+      "definition": "FOREIGN KEY (track_id) REFERENCES public.track(track_id)"
+    },
+    {
+      "constraint_name": "playlist_track_playlist_id_fkey",
+      "source_schema": "public",
+      "source_table": "playlist_track",
+      "source_column": "playlist_id",
+      "target_schema": "public",
+      "target_table": "playlist",
+      "target_column": "playlist_id",
+      "column_position": 1,
+      "definition": "FOREIGN KEY (playlist_id) REFERENCES public.playlist(playlist_id)"
+    },
+    {
+      "constraint_name": "playlist_track_track_id_fkey",
+      "source_schema": "public",
+      "source_table": "playlist_track",
+      "source_column": "track_id",
+      "target_schema": "public",
+      "target_table": "track",
+      "target_column": "track_id",
+      "column_position": 1,
+      "definition": "FOREIGN KEY (track_id) REFERENCES public.track(track_id)"
+    },
+    {
+      "constraint_name": "track_album_id_fkey",
+      "source_schema": "public",
+      "source_table": "track",
+      "source_column": "album_id",
+      "target_schema": "public",
+      "target_table": "album",
+      "target_column": "album_id",
+      "column_position": 1,
+      "definition": "FOREIGN KEY (album_id) REFERENCES public.album(album_id)"
+    },
+    {
+      "constraint_name": "track_genre_id_fkey",
+      "source_schema": "public",
+      "source_table": "track",
+      "source_column": "genre_id",
+      "target_schema": "public",
+      "target_table": "genre",
+      "target_column": "genre_id",
+      "column_position": 1,
+      "definition": "FOREIGN KEY (genre_id) REFERENCES public.genre(genre_id)"
+    },
+    {
+      "constraint_name": "track_media_type_id_fkey",
+      "source_schema": "public",
+      "source_table": "track",
+      "source_column": "media_type_id",
+      "target_schema": "public",
+      "target_table": "media_type",
+      "target_column": "media_type_id",
+      "column_position": 1,
+      "definition": "FOREIGN KEY (media_type_id) REFERENCES public.media_type(media_type_id)"
+    }
+  ],
+  "permissions": [
+    {
+      "object_name": "public.album",
+      "schema_exists": true,
+      "object_exists": true,
+      "schema_usage": true,
+      "table_select": true,
+      "rls_enabled": false,
+      "rls_active": false
+    },
+    {
+      "object_name": "public.artist",
+      "schema_exists": true,
+      "object_exists": true,
+      "schema_usage": true,
+      "table_select": true,
+      "rls_enabled": false,
+      "rls_active": false
+    },
+    {
+      "object_name": "public.customer",
+      "schema_exists": true,
+      "object_exists": true,
+      "schema_usage": true,
+      "table_select": true,
+      "rls_enabled": false,
+      "rls_active": false
+    },
+    {
+      "object_name": "public.employee",
+      "schema_exists": true,
+      "object_exists": true,
+      "schema_usage": true,
+      "table_select": true,
+      "rls_enabled": false,
+      "rls_active": false
+    },
+    {
+      "object_name": "public.genre",
+      "schema_exists": true,
+      "object_exists": true,
+      "schema_usage": true,
+      "table_select": true,
+      "rls_enabled": false,
+      "rls_active": false
+    },
+    {
+      "object_name": "public.invoice",
+      "schema_exists": true,
+      "object_exists": true,
+      "schema_usage": true,
+      "table_select": true,
+      "rls_enabled": false,
+      "rls_active": false
+    },
+    {
+      "object_name": "public.invoice_line",
+      "schema_exists": true,
+      "object_exists": true,
+      "schema_usage": true,
+      "table_select": true,
+      "rls_enabled": false,
+      "rls_active": false
+    },
+    {
+      "object_name": "public.media_type",
+      "schema_exists": true,
+      "object_exists": true,
+      "schema_usage": true,
+      "table_select": true,
+      "rls_enabled": false,
+      "rls_active": false
+    },
+    {
+      "object_name": "public.playlist",
+      "schema_exists": true,
+      "object_exists": true,
+      "schema_usage": true,
+      "table_select": true,
+      "rls_enabled": false,
+      "rls_active": false
+    },
+    {
+      "object_name": "public.playlist_track",
+      "schema_exists": true,
+      "object_exists": true,
+      "schema_usage": true,
+      "table_select": true,
+      "rls_enabled": false,
+      "rls_active": false
+    },
+    {
+      "object_name": "public.track",
+      "schema_exists": true,
+      "object_exists": true,
+      "schema_usage": true,
+      "table_select": true,
+      "rls_enabled": false,
+      "rls_active": false
+    }
+  ],
+  "metadata_mode": "live",
+  "permissions_verified": true
+}

@@ -1,6 +1,10 @@
 # Desktop Companion Agent - Project State
 
-> 比赛分支状态（2026-10-05）：从 `30c6bbd` 开始赛题八迁移，当前完成分支、环境脚本和 WPF 构建准备。目标是 10 月 7 日当天提供最小 Demo，10 月 20 日完成初赛交付版。后续工作首先接入 SQL 服务；当前业务并未迁移完成。恢复上下文时先阅读 `docs/比赛迁移记录.md`，下面的 Phase 3 状态作为原助手历史基线保留。
+> 比赛分支：`competition/topic8-demo`，基线 `30c6bbd`。截止计划：10 月 7 日当天最小 Demo，10 月 20 日交付版，10 月 25 日初赛截止。当前用户要求逐步指导其操作，不能自行推进下一阶段。
+
+> 最新状态（2026-10-05）：原助手 WPF/WebSocket/真实 DeepSeek 对话已验收；队员 SQL 模块导入 93 个文件并离线验证（107 项测试、244 子检查、49 项原助手相关测试）；导入保护脚本 9 项回归测试通过。用户已部署 PostgreSQL 18.6、导入 Chinook 11 表/15,607 行、建立 chinook_reader，只读固定查询和真实 DeepSeek SQL 查询均返回 127.98。模型报告 status=ok、reference_match=true，总耗时 1192.76ms。这只验证一个结构化案例，自然语言解析、澄清、RAG 及 WPF 问数接线尚未完成。
+
+> 本机数据库：`.tools/pgsql` 保存程序，`.local/postgres/data` 保存数据；中文路径初始化失败已用用户创建的 `subst P:` 项目别名绕过，PostgreSQL 命令从 `P:\` 运行。管理员及只读连接采用本机 Windows DPAPI 加密配置，助手不读取或打印密码。当前更改尚未提交（工具环境 `.git` 写权限受限）；下一步指导用户保存 Git 检查点，再介绍并开展 WPF 接线。恢复上下文先读 `docs/比赛迁移记录.md` 和 `docs/目录导航.md`；以下 Phase 3 内容仅为原助手历史。
 
 > Context checkpoint: Phase 3 completed on 2026-09-13.
 >

@@ -1,0 +1,171 @@
+{
+  "reviewed_at": "2026-10-04T07:29:29.325839+00:00",
+  "source_sql_sha256": "e3fde5c1a5b51a2a91429a702c9ca6e69ba56e6c7f5e112724d70c3d03db695e",
+  "independent_source_parser": "sqlglot_postgresql",
+  "national_string_semantics": "PostgreSQL N literals are character values; conversion to varchar removes trailing ASCII spaces",
+  "source_row_counts": {
+    "album": 347,
+    "artist": 275,
+    "customer": 59,
+    "employee": 8,
+    "genre": 25,
+    "invoice": 412,
+    "invoice_line": 2240,
+    "media_type": 5,
+    "playlist": 18,
+    "playlist_track": 8715,
+    "track": 3503
+  },
+  "source_invoice_date_min": "2021-01-01T00:00:00",
+  "source_invoice_date_max": "2025-12-22T00:00:00",
+  "source_invoice_total": "2328.60",
+  "source_invoice_detail_reconciliation": "passed",
+  "live_identity": {
+    "database_name": "chinook",
+    "role_name": "chinook_reader"
+  },
+  "live_table_comparison": {
+    "album": {
+      "rows": 347,
+      "all_values_match_source": true
+    },
+    "artist": {
+      "rows": 275,
+      "all_values_match_source": true
+    },
+    "customer": {
+      "rows": 59,
+      "all_values_match_source": true
+    },
+    "employee": {
+      "rows": 8,
+      "all_values_match_source": true
+    },
+    "genre": {
+      "rows": 25,
+      "all_values_match_source": true
+    },
+    "invoice": {
+      "rows": 412,
+      "all_values_match_source": true
+    },
+    "invoice_line": {
+      "rows": 2240,
+      "all_values_match_source": true
+    },
+    "media_type": {
+      "rows": 5,
+      "all_values_match_source": true
+    },
+    "playlist": {
+      "rows": 18,
+      "all_values_match_source": true
+    },
+    "playlist_track": {
+      "rows": 8715,
+      "all_values_match_source": true
+    },
+    "track": {
+      "rows": 3503,
+      "all_values_match_source": true
+    }
+  },
+  "live_write_privileges": "none",
+  "enhanced_snapshot_review": {
+    "summary": {
+      "tables": 11,
+      "table_columns": 64,
+      "views": 0,
+      "view_columns": 0,
+      "foreign_keys": 11,
+      "primary_keys": 11,
+      "unique_constraints": 0
+    },
+    "schema_fingerprint_sha256": "21aa89100b3c48a145b963a1da4d85415e0145606a96adcc4c1978a538cb68f6",
+    "fields_metrics_aliases_joins_conditions_versions_permissions": "passed",
+    "input_not_mutated": true,
+    "currency": "not_declared",
+    "time_semantics": "naive_calendar"
+  },
+  "independent_queries": [
+    {
+      "case": "all_period",
+      "expected": "2328.60",
+      "actual": "2328.60",
+      "passed": true
+    },
+    {
+      "case": "2024",
+      "expected": "477.53",
+      "actual": "477.53",
+      "passed": true
+    },
+    {
+      "case": "usa_chinese_alias",
+      "expected": "523.06",
+      "actual": "523.06",
+      "passed": true
+    },
+    {
+      "case": "countries_in",
+      "expected": "827.02",
+      "actual": "827.02",
+      "passed": true
+    },
+    {
+      "case": "customer_integer",
+      "expected": "39.62",
+      "actual": "39.62",
+      "passed": true
+    },
+    {
+      "case": "empty_period",
+      "expected": "0.00",
+      "actual": "0.00",
+      "passed": true
+    },
+    {
+      "case": "city_stuttgart",
+      "expected": "37.62",
+      "actual": "37.62",
+      "passed": true
+    },
+    {
+      "case": "country_city",
+      "expected": "37.62",
+      "actual": "37.62",
+      "passed": true
+    },
+    {
+      "case": "missing_time_clarification",
+      "passed": true
+    },
+    {
+      "case": "unresolved_injection_value_not_executed",
+      "passed": true
+    },
+    {
+      "case": "unsupported_refund_metric_not_executed",
+      "passed": true
+    }
+  ],
+  "snapshot_consistency": {
+    "sync_async_saved_offline_fingerprints_match": true,
+    "offline_permissions_not_claimed_live": true,
+    "city_field_present": true
+  },
+  "advanced_city_query": {
+    "status": "ok",
+    "validation_status": "passed",
+    "actual": "37.62",
+    "provider_mode": "fixed_example_provider",
+    "same_transaction_revalidation": true
+  },
+  "model_api_called": false,
+  "review_status": "passed",
+  "evaluation_projection_review": {
+    "source_and_live_snapshot_hash_match": true,
+    "canonical_hash": "2f3832657732d717e5ca80084b71cd3c68becdefb3fa7a09879453556d688c14",
+    "national_literal_semantics_verified": true
+  }
+}

@@ -1,5 +1,6 @@
 """Prepare the verified official .NET 8 SDK inside this project."""
 
+import argparse
 import hashlib
 import urllib.request
 import zipfile
@@ -17,6 +18,9 @@ SDK_SHA512 = (
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--archive", type=Path, help="Use an official offline SDK ZIP")
+    args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     destination = root / ".tools" / "dotnet"
     if (destination / "sdk" / SDK_VERSION / "dotnet.dll").is_file():
@@ -25,18 +29,23 @@ def main() -> None:
 
     cache = root / ".cache"
     cache.mkdir(exist_ok=True)
-    archive = cache / f"dotnet-sdk-{SDK_VERSION}-win-x64.zip"
+    archive = args.archive or cache / f"dotnet-sdk-{SDK_VERSION}-win-x64.zip"
+    if args.archive and not archive.is_file():
+        raise FileNotFoundError(f"Offline SDK archive not found: {archive}")
     if not archive.is_file():
         print(f"Downloading official .NET SDK {SDK_VERSION}...", flush=True)
+        partial = archive.with_suffix(".zip.part")
         with urllib.request.urlopen(SDK_URL, timeout=60) as response:
-            with archive.open("wb") as output:
+            with partial.open("wb") as output:
                 while block := response.read(1024 * 1024):
                     output.write(block)
+        partial.replace(archive)
 
     with archive.open("rb") as source:
         checksum = hashlib.file_digest(source, "sha512").hexdigest()
     if checksum != SDK_SHA512:
-        archive.unlink()
+        if not args.archive:
+            archive.unlink()
         raise RuntimeError(".NET SDK checksum mismatch; retry setup.")
 
     destination.mkdir(parents=True, exist_ok=True)

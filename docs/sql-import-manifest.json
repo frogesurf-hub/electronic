@@ -1,0 +1,385 @@
+{
+  "imported_on": "2026-10-05",
+  "source": "F:\\01_Projects\\School\\竞赛\\电子杯\\SQL查询以及评估",
+  "excluded": [
+    ".local",
+    "__pycache__",
+    "migration",
+    "tmp",
+    "duplicate providers"
+  ],
+  "files": [
+    {
+      "path": "src/agent_core/sql/__init__.py",
+      "sha256": "9d31f4d9a742e8f3be471ad57672ab5ad17abc1837829607b60ad3dc8ca64f66"
+    },
+    {
+      "path": "src/agent_core/sql/detail_example.py",
+      "sha256": "a286a962e008252c6586d47aa598888a91fa2a2e92a99a39141c0c392dcb7a86"
+    },
+    {
+      "path": "src/agent_core/sql/detail_generation.py",
+      "sha256": "50e3b74c80e58170a5df3d2052dbc51b97e1122c60abe045542c9de4a73c9954"
+    },
+    {
+      "path": "src/agent_core/sql/detail_service.py",
+      "sha256": "dc69641a031079f423937a5b87a49474d47de32f35d95e8f8bb0d5b57fb411e6"
+    },
+    {
+      "path": "src/agent_core/sql/example.py",
+      "sha256": "fe216889bfb322dd9656f1d92c11d222fec11fb2df6f0d8eaadcebe29928bee1"
+    },
+    {
+      "path": "src/agent_core/sql/generation_service.py",
+      "sha256": "03e94cc18e5391022a65266d1b6602354980104d129b20df2dc6cac98a2b43e9"
+    },
+    {
+      "path": "src/agent_core/sql/llm_sql_generator.py",
+      "sha256": "491b374b1d06fdf68c2645a6177134fe4da3515e413a3e486a36de8dd6f54d10"
+    },
+    {
+      "path": "src/agent_core/sql/readonly_example.py",
+      "sha256": "b796d894bcb3063c0f8ffc9fd4f8b1d6898ddcc995ff745607eac995bad996f5"
+    },
+    {
+      "path": "src/agent_core/evaluation/__init__.py",
+      "sha256": "887c27321db0a839b0216a96a6fc444d5a49b5b30c1357479e0a9ccb66bf6e8d"
+    },
+    {
+      "path": "src/agent_core/evaluation/chinook_dataset.py",
+      "sha256": "1d1027bf58d113e3a378666d61d747f38a503760738319f73536105ab3d13811"
+    },
+    {
+      "path": "src/agent_core/evaluation/chinook_detail_example.py",
+      "sha256": "f20ea4735f88ac871d5e3bb8f5680beec7a67ade40bc598757d3b8536893da6f"
+    },
+    {
+      "path": "src/agent_core/evaluation/chinook_detail_oracle.py",
+      "sha256": "33c11aedf3d70c8226d9bd86ed8544bccfa10f54623d37894bb9d94c04140018"
+    },
+    {
+      "path": "src/agent_core/evaluation/chinook_oracle.py",
+      "sha256": "19a82d56b2139cf1fb12a43832803153b8454aa3da159d64f0af55623e552afd"
+    },
+    {
+      "path": "src/agent_core/evaluation/chinook_snapshot.py",
+      "sha256": "7b602b03d78b735a756baac3ff3e16c93959b9d0a1900a5b696ba6d3b7a0b0a1"
+    },
+    {
+      "path": "src/agent_core/evaluation/contracts.py",
+      "sha256": "892f807a0713eac770dfa742162f87ef7968776eab1365d50e76711c428893e2"
+    },
+    {
+      "path": "src/agent_core/evaluation/dataset.py",
+      "sha256": "f84cc864632ceb8066c0fcdd6e86c8a82c07754132185d2d8517d5fb646d4b12"
+    },
+    {
+      "path": "src/agent_core/evaluation/example.py",
+      "sha256": "6501dc1f9e6ce947d1dfeff5db85ca2546f7a6e54a4c2c7c4e431d397f5a87d2"
+    },
+    {
+      "path": "src/agent_core/evaluation/reporting.py",
+      "sha256": "1a6edeb3d9606de0db78c7ff9aafc3ce964af458a6fa920c6c9b5b2c873aeca9"
+    },
+    {
+      "path": "src/agent_core/evaluation/runner.py",
+      "sha256": "1f07eb7092108ed09bc26e9603b026cb3c61a50f71a885d8f1b7b1ff71828fe6"
+    },
+    {
+      "path": "src/agent_core/evaluation/scoring.py",
+      "sha256": "c03466b925ab2217d9446db9620ad7d97da13b6ed834ed1a369b756ff3307dcd"
+    },
+    {
+      "path": "src/agent_core/evaluation/snapshot.py",
+      "sha256": "c22ef4d43254342e9cf218c636c3bce28486abaae22cda5f76fd7319f662a875"
+    },
+    {
+      "path": "database/本地数据库使用说明.md",
+      "sha256": "aff4c0445a04a23b0ad26b2cd79d5a2949a969e42f80a3e03d27178abaf407ef"
+    },
+    {
+      "path": "database/连接检查.sql",
+      "sha256": "f3e64d7720930121c7ae93202d587ac2e51bc40d7347adda4237d0999040e09b"
+    },
+    {
+      "path": "database/artifact_io.py",
+      "sha256": "6f0dcda16be9bac925d3f7b0a539beeffe31c60deb564c43f19784d567f8edea"
+    },
+    {
+      "path": "database/Chinook_PostgreSql.sql",
+      "sha256": "e3fde5c1a5b51a2a91429a702c9ca6e69ba56e6c7f5e112724d70c3d03db695e"
+    },
+    {
+      "path": "database/chinook_query.py",
+      "sha256": "ad0abbb3eb8907011231c616bcc4546225948eac4a2c242415066d37758b37aa"
+    },
+    {
+      "path": "database/chinook_schema_examples.sql",
+      "sha256": "0c98d3b39beec00126f6fa47458f779afaed00c2972bdee85a836f1986817a1e"
+    },
+    {
+      "path": "database/chinook_snapshot.py",
+      "sha256": "485dfecb998e6c4dcbbc9d04082eb47f92e873ad8d129a7d80e166c01e4c83da"
+    },
+    {
+      "path": "database/CHINOOK.md",
+      "sha256": "0df0989b798022d8bbf28a89eeeb5a61f1a1b15c7e75cbc437d89fd6bc9dfdae"
+    },
+    {
+      "path": "database/connection_settings.py",
+      "sha256": "d542121c378644ccf7f8816ff61d3d90f64815989910c01618b20070a87c96ab"
+    },
+    {
+      "path": "database/detail_contracts.py",
+      "sha256": "778eb6fdf1ca6d92d5e3bad765e6e3fdb64674295d75cb6dc79d7d25817ac9ef"
+    },
+    {
+      "path": "database/detail_executor.py",
+      "sha256": "051cdee3d5e7b6fa6ddcb4b6bc237450207e4df1be7fa6d26c76d78b361f8d34"
+    },
+    {
+      "path": "database/detail_query.py",
+      "sha256": "106dc00c71801829da95d3d972de735ffc029fee718ac8fec5b11df015e75d30"
+    },
+    {
+      "path": "database/detail_validator.py",
+      "sha256": "c4582ff0d20af87cf8ca488c347f2e6b0dfcaa9e305bc4cda229755886651b9b"
+    },
+    {
+      "path": "database/enrich_schema_snapshot.py",
+      "sha256": "027c0e67bedec02fc4baecc931ee52d85cd7a72e893f3d3a9d91aa988c4ba924"
+    },
+    {
+      "path": "database/metadata_reader.py",
+      "sha256": "275e1a63f918d7bfe5a47532ce0786bcf37064dc871b24aefe406befacbcda75"
+    },
+    {
+      "path": "database/query_example.py",
+      "sha256": "f285dd45c24e623942f3232579825c373be58f4016271f32c3fddae82449af55"
+    },
+    {
+      "path": "database/query_profiles.py",
+      "sha256": "1f962a3c5aeb68cb8e6f8a1f60bfa6546d25014e954ecfe9786d40716d66f907"
+    },
+    {
+      "path": "database/README.md",
+      "sha256": "24a51df30efe0bbfefeb3ce01dfea91e99339f0171a19a5b67546951ebabda36"
+    },
+    {
+      "path": "database/readonly_connection.py",
+      "sha256": "6923c133bb892712b75b98bad82a5bab2ef358b8fb9c459340c2c5cf6aec7fea"
+    },
+    {
+      "path": "database/readonly_sql_executor.py",
+      "sha256": "ae2d422da7845b101b847c0b67774d4669b804779234afbf03b8fec9fd1d710a"
+    },
+    {
+      "path": "database/requirements.txt",
+      "sha256": "432c07cca266643cc1aa3baa15784b5ea3f6e952e56adfeeddf8bd5ab7136801"
+    },
+    {
+      "path": "database/schema_linking_service.py",
+      "sha256": "8be9c8708f27a3812f2c201dc0a820a317ec45b4431e5c41de4374f4581fdc15"
+    },
+    {
+      "path": "database/setup_chinook.py",
+      "sha256": "a53ce4a85d2ba8d46d6ce650a902a7f2ff6612a093c3bdb5bf437a5ef7072553"
+    },
+    {
+      "path": "database/source_config.json",
+      "sha256": "8785acffd787ab5cb5b2e822ad151079f4e206e314a5c548793cce2f7d77a9c0"
+    },
+    {
+      "path": "database/sql_common.py",
+      "sha256": "860be2b89342e6bcf1622630cb02c317a7106696d21d0e7fbc3dc99e1286d5d3"
+    },
+    {
+      "path": "database/sql_contracts.py",
+      "sha256": "eb2065bcce3ae6f79f72c1a4d80b87b21f799f2ff92ebad9e669ceba4e891442"
+    },
+    {
+      "path": "database/sql_generator.py",
+      "sha256": "bd0e3aa832828c29811ae8c48b7e07af336e0b540c733ae13342b18c9bb01380"
+    },
+    {
+      "path": "database/sql_service.py",
+      "sha256": "963f81834168e27fb7d51f26857c99ed6876f274a690b5bbfc7951f78108305e"
+    },
+    {
+      "path": "database/sql_validator.py",
+      "sha256": "de208d15af4c5897d0c00912e415936d7232ea487f47132f7fd974dc34a4445d"
+    },
+    {
+      "path": "database/SQLService使用说明.md",
+      "sha256": "10a6bfe17fe53fe2919e6bc3f9213b313128fdd6cc80c0443074158b8db56c20"
+    },
+    {
+      "path": "database/test_connection_settings.py",
+      "sha256": "3fc2d04b21723380733875a56cc048da64cd31b56cdd6e762ab1e005c869ceb7"
+    },
+    {
+      "path": "database/verify_chinook.py",
+      "sha256": "4e4ec1b638a1a975cfc0779e701379d635fc1c0444ba75ebb2deb8376341699a"
+    },
+    {
+      "path": "database/documents/DOC-CLARIFY.md",
+      "sha256": "26ee5bc38907fdec558ae3c943d988baddf57216accdabf66a367e819070c58a"
+    },
+    {
+      "path": "database/documents/DOC-E001.md",
+      "sha256": "434a9f9789fef70b7f23b679d63208b358198d83d85fdc11b6ce77c04b2e4868"
+    },
+    {
+      "path": "database/documents/DOC-E002.md",
+      "sha256": "e515a239ace55aa65a61d8a259761fca7797be77c05c280f482acbbd42e93a42"
+    },
+    {
+      "path": "database/documents/DOC-METRICS.md",
+      "sha256": "d1357b23b21f214c7f9829a8c0f8c63b1e0d138de2cc033892dd855ae5af99ed"
+    },
+    {
+      "path": "database/documents/DOC-REFUNDS.md",
+      "sha256": "60d044d522e929d6296f54beea1b91d61e6428810202a711bee21579471cf971"
+    },
+    {
+      "path": "database/generated/chinook_enriched_snapshot.json",
+      "sha256": "e104eee9c3c7297788584ab386b6239d6985c32d1f4e25e43afbc9cf14f9e82c"
+    },
+    {
+      "path": "database/generated/chinook_metadata.json",
+      "sha256": "a8aebfdaf922eda9092c73ac93d354f5acb3880f0761ab972585744ad39c045d"
+    },
+    {
+      "path": "database/generated/chinook_schema_snapshot.json",
+      "sha256": "8a3706612d4ac4d9988975270f71a9818b595d1de7163d076f67285c747627b0"
+    },
+    {
+      "path": "database/generated/chinook_snapshot_review.json",
+      "sha256": "ad3b8e4257736b875bf274cb0958e89f78297e1548a87e711f867a9f767574dd"
+    },
+    {
+      "path": "database/generated/chinook_verification.json",
+      "sha256": "6780e20d11c535818e7d5d619049f86fa06da53b638ee570ec92a59b4e218596"
+    },
+    {
+      "path": "evaluation/build_chinook_dataset.py",
+      "sha256": "de195ceda2827d45de16d89ff2f54bd699162d9528c2c0075d761ca11dd46792"
+    },
+    {
+      "path": "evaluation/datasets/chinook_manifest.json",
+      "sha256": "9e2003c580db04a8bfd6bfc53b480cb76500e36879ccf650c300f72a27acbfdc"
+    },
+    {
+      "path": "evaluation/datasets/chinook_schema.json",
+      "sha256": "8a3706612d4ac4d9988975270f71a9818b595d1de7163d076f67285c747627b0"
+    },
+    {
+      "path": "evaluation/datasets/chinook_source.json",
+      "sha256": "f145e95e722738fccd9b835fbf7a0eb9704b596ed32117f4899c6d1b201bc728"
+    },
+    {
+      "path": "evaluation/datasets/chinook_sql_v1.jsonl",
+      "sha256": "5800ae596447ac437903955a4436c64d7fc2043017d580a17e81f182a1a883eb"
+    },
+    {
+      "path": "evaluation/reports/chinook_detail_live_demo.json",
+      "sha256": "5b3627c5af0fc68ab8e302dea502a6ec8cc1efead9bd9aa1513aa5bff63b74c8"
+    },
+    {
+      "path": "evaluation/reports/chinook_live_demo.json",
+      "sha256": "8c5ea3eb6a269e51bb52991874865652b933589a5419a32e42716872e0f915be"
+    },
+    {
+      "path": "tests/test_chinook_detail_oracle.py",
+      "sha256": "79894e56f2635674e7d9070715348c984f8251368d23580456a7c627814a04c6"
+    },
+    {
+      "path": "tests/test_chinook_evaluation_dataset.py",
+      "sha256": "caf8a976892e8839fd1ca2c945ef2da19543c3d7ed4909e4d2e309c08e561ab2"
+    },
+    {
+      "path": "tests/test_chinook_evaluation_scoring.py",
+      "sha256": "ab594e75f3f320b41bc8cef59e8ed9a72b10ea9a628b3917f95fbc8f6194f0b1"
+    },
+    {
+      "path": "tests/test_chinook_evaluation_snapshot.py",
+      "sha256": "074bce93844efc57a54ccaa9816fd1c84cf4b4233203dc03fa53cc2895540ddf"
+    },
+    {
+      "path": "tests/test_chinook_only.py",
+      "sha256": "dbbbb3dfa6d3d61111823525bc8789ac3572c2f4073dd32f05dd81a6ddfc1229"
+    },
+    {
+      "path": "tests/test_chinook_pipeline.py",
+      "sha256": "6641c1fb9ad5a1f4052a0117d5758979b2531f341356bcbef9f74556d83c4f35"
+    },
+    {
+      "path": "tests/test_database_source_binding.py",
+      "sha256": "a2f0f057bbc4270c5a965ea3384fe488092807cebb7be7d0ce01f19854b9e8e6"
+    },
+    {
+      "path": "tests/test_detail_executor.py",
+      "sha256": "e67e425ceb243a378328c96640e24f8a8a247b60017078669d841d8c224214c2"
+    },
+    {
+      "path": "tests/test_detail_generation_service.py",
+      "sha256": "3c0baa3df90adcbf5c5bec0cf3ec4a3d0b00f583d637242d3839f93bb421850c"
+    },
+    {
+      "path": "tests/test_detail_llm_generator.py",
+      "sha256": "262d5cff52a6f44592351af305a824547fbf2c396c44eb4790a5e1c722316cc5"
+    },
+    {
+      "path": "tests/test_detail_query.py",
+      "sha256": "0a6c7c9dc172a257fa52ca6f47a3f7eb7a9f482cb1edb052b6325108631653c3"
+    },
+    {
+      "path": "tests/test_detail_validator.py",
+      "sha256": "b8ab4a5f4ed967807d40f83917da12278e410163c144b8663d84af279c8aefcf"
+    },
+    {
+      "path": "tests/test_evaluation_integration.py",
+      "sha256": "94adee45f37bf80d9898aed9ea89be534faeb7c46874d070bea89c4a45f4beec"
+    },
+    {
+      "path": "tests/test_evaluation_reporting.py",
+      "sha256": "e66b9fc37d1d4ec473fc94d1bac626f949fa3da60ea379e938cf27a49e0fbb16"
+    },
+    {
+      "path": "tests/test_evaluation_runner.py",
+      "sha256": "8a76590944fd6e9fa4e9aa34c5c0ada92311e96e797a0c9eaddf9f8c34c2ed44"
+    },
+    {
+      "path": "tests/test_evaluation_scoring.py",
+      "sha256": "93abc8022451ec814b23096f33863ecc1b1a5e9a3327ed895cd51365ea4a691b"
+    },
+    {
+      "path": "tests/test_llm_generation_service.py",
+      "sha256": "c1cbb6660d9380e5470aef0b7fafeb8ce4a07d3403f0ff537753d6fc1dd7df5d"
+    },
+    {
+      "path": "tests/test_llm_sql_generator.py",
+      "sha256": "cadfd0b10bf67742ecf52c7ed2ce9a4129eea34d7a83195c63283a0b51bcdc16"
+    },
+    {
+      "path": "tests/test_readonly_connection.py",
+      "sha256": "5ea51ced56e8c9e1ef50a4ac6809af4410cd070bdeed1b0aca1b92e9982fdf57"
+    },
+    {
+      "path": "tests/test_readonly_generation_service.py",
+      "sha256": "b322c20ace5988e54a4fe6acd7bdc7e7fdb528c69d17e2ee916190ca49c634ac"
+    },
+    {
+      "path": "tests/test_readonly_sql_executor.py",
+      "sha256": "1e415294dd642e3483f5cfa61a34142d7331003347d0f8dcdc32a7ec4a3c09dc"
+    },
+    {
+      "path": "tests/test_sql_validation_service.py",
+      "sha256": "eee1c7783e0ff7c9a6c64b282b2fbb08ca5e831e8c9c149e150e731423866bc0"
+    },
+    {
+      "path": "tests/test_sql_validator.py",
+      "sha256": "bb96ac14b3258b7de4177ffa049beec917717621664e277cc5307e9605bd342a"
+    }
+  ]
+}
