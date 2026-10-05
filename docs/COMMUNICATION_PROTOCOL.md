@@ -41,6 +41,10 @@ evidence_id、doc_id、title、version、section、line_start/line_end、quote �
 Markdown 的 page 为 null，不伪造页码。结果标明模拟来源，不修改 Chinook SQL 口径。
 检索条件支持 doc_ids/doc_version/doc_as_of；缺少这些筛选时搜索全部已导入模拟文档。
 qa_query 为补全指代后的检索文字，回答同时接收原问题；公共理解保留问题歧义并走澄清。
+qa 的理解 issues 只用于需要用户确认的需求歧义或矛盾，不用于尚未检索的资料覆盖判断。
+问题明确但可能缺少部分答案时，保留全部子问题交给问答支线；不能先以资料不足提示阻断。
+问答逐项检查证据，至少一项可回答而其余项不足时返回 partial，保留可核验结论和引用，
+并以 missing 描述未回答部分；仍核验结论和缺失说明，不能编造事实。
 没有相关原文时不调用模型，返回 insufficient_evidence。模型结论先检查引用标识和
 原文摘录，再通过共享 Provider 独立核对结论是否被所引用摘录支持。
 此检查有模型判断局限，不代表已经完成忠实度效果评估；支持不足时不展示该结论。

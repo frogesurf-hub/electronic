@@ -342,6 +342,106 @@ def test_business_flow_routes_qa_without_sql_or_sql_required_time(search):
     assert not sql.calls
 
 
+def test_explicit_multipart_qa_preserves_answerable_claim_and_missing_part(search):
+    question = "根据张伟的回访记录，他如何减少沟通偏差？他的手机号码是多少？"
+
+    class MultipartProvider(QAProvider):
+        async def generate(self, request):
+            context = json.loads(request.messages[-1].content)
+            if "current_datetime" in context:
+                return LLMResponse(
+                    json.dumps(
+                        {
+                            "problem_type": "qa",
+                            "qa_query": question,
+                            "issues": [],
+                        },
+                        ensure_ascii=False,
+                    )
+                )
+            if "evidence" in context:
+                assert context["question"] == question
+                assert "沟通偏差" in context["resolved_query"]
+                assert "手机号码" in context["resolved_query"]
+            return await super().generate(request)
+
+    provider = MultipartProvider(
+        status="partial", missing="张伟的手机号码缺少原文依据。"
+    )
+    sql = FakeSQL()
+    flow = BusinessFlow(
+        UnderstandingService(provider),
+        sql,
+        FixedClock(NOW),
+        qa_service=DocumentQAService(provider, search),
+    )
+    response = asyncio.run(flow.process_message(request(question)))
+    assert response.type == "response"
+    assert response.payload["status"] == "partial"
+    assert QUOTE in response.payload["message"]
+    assert "资料未覆盖：张伟的手机号码缺少原文依据。" in response.payload["message"]
+    assert response.payload["citations"][0]["quote"] == QUOTE
+    assert response.payload["citations"][0]["doc_id"] == "DOC-E001"
+    assert response.payload["issues"] == []
+    assert [step["service"] for step in response.payload["trace"]] == [
+        "understanding",
+        "retrieval",
+        "qa_generation",
+        "citation_check",
+        "grounding_check",
+    ]
+    assert not sql.calls
+
+
+def test_genuine_qa_requirement_ambiguity_still_clarifies_before_retrieval(search):
+    class AmbiguousProvider(QAProvider):
+        async def generate(self, request):
+            self.requests.append(request)
+            return LLMResponse(
+                json.dumps(
+                    {
+                        "problem_type": "qa",
+                        "issues": ["请确认“他”指张伟还是陈敏。"],
+                    },
+                    ensure_ascii=False,
+                )
+            )
+
+    provider, sql = AmbiguousProvider(), FakeSQL()
+    flow = BusinessFlow(
+        UnderstandingService(provider),
+        sql,
+        FixedClock(NOW),
+        qa_service=DocumentQAService(provider, search),
+    )
+    response = asyncio.run(
+        flow.process_message(request("根据演示文档，他如何减少沟通偏差？"))
+    )
+    assert response.payload["status"] == "needs_clarification"
+    assert response.payload["issues"][0]["code"] == "AMBIGUOUS_REQUIREMENT"
+    assert response.payload["citations"] == []
+    assert len(provider.requests) == 1
+    assert len(response.payload["trace"]) == 1
+    assert not sql.calls
+
+
+def test_partial_claims_and_missing_text_are_hidden_when_grounding_rejects(search):
+    provider = QAProvider(
+        status="partial", missing="编造的手机号码 13800000000", supported=False
+    )
+    result = asyncio.run(
+        DocumentQAService(provider, search).answer(
+            "张伟如何减少沟通偏差？他的手机号码是多少？",
+            request_id="qa-partial-rejected",
+        )
+    )
+    assert result["status"] == "insufficient_evidence"
+    assert result["citations"] == []
+    assert "13800000000" not in result["message"]
+    assert QUOTE not in result["message"]
+    assert result["issues"][0]["code"] == "ANSWER_GROUNDING_REJECTED"
+
+
 def test_current_imported_demo_corpus_retrieves_appropriate_originals():
     root = Path(__file__).resolve().parents[3]
     search = DocumentSearch(root / ".local" / "knowledge" / COLLECTION_ID)
