@@ -1,5 +1,7 @@
 # Desktop Companion Agent - Project State
 
+> 比赛分支状态（2026-10-05）：从 `30c6bbd` 开始赛题八迁移，当前完成分支、环境脚本和 WPF 构建准备。目标是 10 月 7 日当天提供最小 Demo，10 月 20 日完成初赛交付版。后续工作首先接入 SQL 服务；当前业务并未迁移完成。恢复上下文时先阅读 `docs/比赛迁移记录.md`，下面的 Phase 3 状态作为原助手历史基线保留。
+
 > Context checkpoint: Phase 3 completed on 2026-09-13.
 >
 > This file is the primary context-recovery document for future development sessions. If chat context is lost, read this file first, then `docs/PHASE_3_CHECKPOINT.md`, `ARCHITECTURE.md`, `ROADMAP.md`, and the relevant subsystem design / ADR documents.

@@ -18,3 +18,10 @@ models/
 logs/
 
 *.egg-info/
+
+# Project-local development tools and caches
+.tools/
+.cache/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/

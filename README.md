@@ -1,5 +1,7 @@
 # Desktop Companion Agent
 
+> 当前分支 `competition/topic8-demo` 用于赛题八的 WPF 问数/问答迁移，基于 Phase 3 提交 `30c6bbd`。环境准备与启动步骤见 [比赛迁移记录](docs/比赛迁移记录.md)。下文保留原助手的历史项目说明，比赛开发状态以迁移记录为准。
+
 Desktop Companion Agent 是一个长期 Windows 桌面 AI 伴侣项目。
 
 目标不是制作普通的问答聊天框，而是构建一个可以长期运行、理解桌面情境、拥有角色与记忆、能够主动决定是否互动，并在权限边界内帮助用户完成工作的桌面 Companion Runtime。
